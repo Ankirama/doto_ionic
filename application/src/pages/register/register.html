@@ -1,0 +1,55 @@
+<!--
+  Generated template for the RegisterPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Create your account</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+  <form [formGroup]="authForm" (ngSubmit)="onSubmit(authForm.value)">
+      <ion-item>
+          <ion-label floating>Email</ion-label>
+          <ion-input formControlName="email" type="email"></ion-input>
+      </ion-item>
+
+      <ion-item *ngIf="authForm.controls.email.hasError('required') && authForm.controls.email.touched">
+          <p>Email field required!</p>
+      </ion-item>
+      <ion-item *ngIf="authForm.controls.email.hasError('pattern') && authForm.controls.email.touched">
+          <p>You must use a valid email!</p>
+      </ion-item>
+
+      <ion-item>
+          <ion-label floating>Password</ion-label>
+          <ion-input formControlName="password" type="password"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="authForm.controls.password.hasError('required') && authForm.controls.password.touched">
+          <p>Password field required!</p>
+      </ion-item>
+      <ion-item *ngIf="authForm.controls.password.hasError('minlength') && authForm.controls.password.touched">
+          <p>Sorry, minimum password length is 8!</p>
+      </ion-item>
+
+      <ion-item>
+          <ion-label floating>Password check</ion-label>
+          <ion-input formControlName="password_check" type="password"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="authForm.controls.password_check.hasError('required') && authForm.controls.password_check.touched">
+          <p>Password check field required!</p>
+      </ion-item>
+      <ion-item *ngIf="authForm.controls.password_check.hasError('minlength') && authForm.controls.password_check.touched">
+          <p>Sorry, minimum password length is 8!</p>
+      </ion-item>
+      <ion-item *ngIf="authForm.controls.password_check.hasError('mismatch') && authForm.controls.password_check.touched">
+          <p>Your password must match!</p>
+      </ion-item>
+
+      <button ion-button full color="primary" [disabled]="!authForm.valid" style="margin-top: 20px;" type="submit">Authorize</button>
+  </form></ion-content>

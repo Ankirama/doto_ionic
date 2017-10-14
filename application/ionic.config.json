@@ -1,0 +1,8 @@
+{
+  "name": "doto_data",
+  "app_id": "",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
+}

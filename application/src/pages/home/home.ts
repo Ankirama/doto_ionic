@@ -8,8 +8,17 @@ import { AuthProvider } from '../../providers/auth/auth';
 })
 export class HomePage {
 
-
+  email: string;
   constructor(public navCtrl: NavController, private auth: AuthProvider) {
+    auth.getCurrentUser()
+      .then(data => {
+        if (data !== null) {
+          this.email = data.email;
+        }
+      })
+      .catch(err => {
+        console.log('debug error => ', err);
+      });
   }
 
   logout(): void {

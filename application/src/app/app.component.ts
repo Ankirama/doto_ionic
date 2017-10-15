@@ -14,22 +14,21 @@ import { TabsPage } from '../pages/tabs/tabs';
 export class MyApp {
   rootPage:any;
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
+  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, af: AngularFireAuth) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       statusBar.styleDefault();
       splashScreen.hide();
-      this.checkPreviousAuthorization();
+      const unsubscribe = af.auth.onAuthStateChanged(user => {
+        if (!user) {
+          this.rootPage = AuthPage;
+          unsubscribe();
+        } else {
+          this.rootPage = TabsPage;
+          unsubscribe();
+        }
+      })
     });
-  }
-
-  checkPreviousAuthorization(): void {
-    if ((window.localStorage.getItem('email') === "undefined" || window.localStorage.getItem('email') === null) &&
-       (window.localStorage.getItem('password') === "undefined" || window.localStorage.getItem('password') === null)) {
-      this.rootPage = AuthPage;
-    } else {
-      this.rootPage = TabsPage;
-    }
   }
 }

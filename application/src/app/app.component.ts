@@ -9,7 +9,7 @@ import { TabsPage } from '../pages/tabs/tabs';
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any;
+  rootPage:any = TabsPage;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
     platform.ready().then(() => {
@@ -17,16 +17,6 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       statusBar.styleDefault();
       splashScreen.hide();
-      this.checkPreviousAuthorization();
     });
-  }
-
-  checkPreviousAuthorization(): void {
-    if ((window.localStorage.getItem('email') === "undefined" || window.localStorage.getItem('email') === null) &&
-       (window.localStorage.getItem('password') === "undefined" || window.localStorage.getItem('password') === null)) {
-      this.rootPage = AuthPage;
-    } else {
-      this.rootPage = TabsPage;
-    }
   }
 }

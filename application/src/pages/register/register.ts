@@ -20,7 +20,7 @@ export class RegisterPage {
 
   authForm: FormGroup;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public formBuilder: FormBuilder, public auth: AuthProvider) {
+    constructor(public navCtrl: NavController, public navParams: NavParams, public formBuilder: FormBuilder, public auth: AuthProvider) {
     this.navCtrl = navCtrl;
     this.authForm = formBuilder.group({
       email: ['', Validators.compose([Validators.required, Validators.pattern('^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,24})$')])],
@@ -29,26 +29,25 @@ export class RegisterPage {
     }, {'validator': PasswordValidator.isMatching});
   }
 
-  onSubmit(value: any): void {
-    if(this.authForm.valid) {
-      let credentials = {
-        email: value.email.toLowerCase(),
-        password: value.password
-      };
-      this.auth.registerUser(credentials, (err, database) => {
-        if (err) {
-          alert(err.message);
-        } else {
-          database
-          .then(data => {
-            console.log('data ==> ', data);
-            location.reload();
-          })
-          .catch(console.log);
+    onSubmit(value: any): void {
+        if(this.authForm.valid) {
+            let credentials = {
+                email: value.email.toLowerCase(),
+                password: value.password
+            };
+            this.auth.registerUser(credentials, (err, database) => {
+                if (err) {
+                    alert(err.message);
+                } else {
+                    database
+                        .then(data => {
+                            location.reload();
+                        })
+                        .catch(console.log);
+                }
+            });
         }
-      });
     }
-  }
 
   ionViewDidEnter() {
     console.log('reset form');

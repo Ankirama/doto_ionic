@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Validators, FormBuilder, FormGroup} from '@angular/forms';
 import { AuthProvider } from '../../providers/auth/auth';
+import { TabsPage } from '../tabs/tabs';
+
+//import { Home } from '../tabs/tabs';
 /**
  * Generated class for the LoginPage page.
  *
@@ -34,7 +37,6 @@ export class LoginPage {
       };
       this.auth.loginWithEmail(credentials)
         .then(data => {
-          console.log('data ==> ', data);
           location.reload();
         })
         .catch(error => {

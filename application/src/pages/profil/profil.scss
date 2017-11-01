@@ -1,3 +1,65 @@
 page-profil {
+    ion-row {
+        margin: 5%;
+    }
+    ion-content {
+        /*
+        div {
+          height: 100%;
+          width: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+        */
 
+        .player-name {
+            font-size: 28px;
+            text-align: center;
+            color: rgba(245,245,245,0.870588)
+        }
+    
+        .circle-pic {
+            width: 75px;
+            height: 75px;
+            -webkit-border-radius: 50%;
+            border-radius: 50%;
+        }
+
+        .info-profil {
+            color: rgba(255, 255, 255, 0.54);
+            font-size: 14px;
+            text-transform: uppercase   
+        }
+
+        .wins-style {
+            color: rgb(102, 187, 106);
+            font-size: 24px;
+        }
+
+        .losses-style {
+            color: rgb(255, 76, 76);
+            font-size: 24px;
+        }
+
+        .rslt-style {
+            color: rgba(255, 255, 255, 0.87);
+            font-size: 24px;            
+        }
+
+        .avg-info {
+            color: rgb(179, 179, 179);
+            font-size: 12px;
+            text-align: left;
+            text-transform: uppercase;
+        }
+
+
+    }
 }
+
+.bg-style {
+    background-color: #192023
+}
+
+

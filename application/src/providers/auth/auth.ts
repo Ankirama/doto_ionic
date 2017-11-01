@@ -19,7 +19,7 @@ export class UserData {
 @Injectable()
 export class AuthProvider {
 
-    constructor(public af: AngularFireAuth, public ad: AngularFireDatabase) {
+    constructor(private af: AngularFireAuth, private ad: AngularFireDatabase) {
         console.log('Hello AuthProvider Provider');
     }
 
@@ -66,7 +66,7 @@ export class AuthProvider {
                                 steamID32: snapshot.val().steamID32
                             };
                             console.log('debug email => ', userData.email);
-                            return resolve(userData.email);
+                            return resolve(userData);
                         })
                         .catch(err => {
                             return reject(err);

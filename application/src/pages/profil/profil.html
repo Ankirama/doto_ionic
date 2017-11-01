@@ -7,12 +7,76 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>profil</ion-title>
+    <ion-title>Profile</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
-
+<ion-content padding class="bg-style" *ngIf="profileInfo">
+  <ion-grid>
+    <ion-row>
+      <ion-col col-4>
+          <img class="circle-pic"
+           src="{{profileInfo.profileAvatar}}">
+      </ion-col>
+      <ion-col>
+        <div class="player-name">{{profileInfo.profileName}}</div>
+        <a href="{{profileInfo.profileUrl}}">See profile on Steam</a>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <div class="info-profil">wins</div>
+        <div class="wins-style">15</div>
+      </ion-col>
+      <ion-col>
+          <div class="info-profil">losses</div>
+          <div class="losses-style">15</div>
+      </ion-col>
+      <ion-col> 
+        <div class="info-profil">winrate</div>
+        <div class="rslt-style">52%</div>
+      </ion-col>
+      <ion-col>
+        <div class="info-profil">mmr</div>
+        <div class="rslt-style">4520</div>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <div class="title">Averages in last matches:</div>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <div class="avg-info">winrate</div>
+        <div>40%</div>
+      </ion-col>
+      <ion-col>
+        <div class="avg-info">kills</div>
+        <div>{{profileInfo.avgKills}}</div>
+      </ion-col>
+      <ion-col>
+        <div class="avg-info">deaths</div>
+        <div>5</div>
+      </ion-col>
+      <ion-col>
+        <div class="avg-info">assists</div>
+        <div>12</div>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <div class="avg-info">gold per min</div>
+        <div>366</div>
+      </ion-col>
+      <ion-col>
+        <div class="avg-info">xp per min</div>
+        <div>7</div>
+      </ion-col>
+      <ion-col>
+        <div class="avg-info">last hits</div>
+        <div>5</div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

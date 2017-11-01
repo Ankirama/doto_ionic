@@ -19,59 +19,64 @@ export class UserData {
 @Injectable()
 export class AuthProvider {
 
-  constructor(public af: AngularFireAuth, public ad: AngularFireDatabase) {
-    console.log('Hello AuthProvider Provider');
-  }
+    constructor(private af: AngularFireAuth, private ad: AngularFireDatabase) {
+        console.log('Hello AuthProvider Provider');
+    }
 
-  loginWithEmail(credentials: any) {
-    return this.af.auth.signInWithEmailAndPassword(credentials.email, credentials.password);
-  }
+    loginWithEmail(credentials: any) {
+        return this.af.auth.signInWithEmailAndPassword(credentials.email, credentials.password);
+    }
 
-  /**
-  ** @brief: Create a user via firebase auth and add it in our database
-  ** @return: callback(error, data)
-  */
-  registerUser(credentials: any, cb) {
-    return this.af.auth.createUserWithEmailAndPassword(credentials.email, credentials.password)
-      .then(user => {
-        return cb(null, this.ad.database.ref('/users')
-          .child(user.uid)
-          .set({email: credentials.email, steamID32: ''}));
-      })
-      .catch(cb);
-  }
+    /**
+     ** @brief: Create a user via firebase auth and add it in our database
+     ** @return: callback(error, data)
+     */
+    registerUser(credentials: any, cb) {
+        return this.af.auth.createUserWithEmailAndPassword(credentials.email, credentials.password)
+            .then(user => {
+                return cb(null, this.ad.database.ref('/users')
+                          .child(user.uid)
+                          .set({email: credentials.email, steamID32: ''}));
+            })
+            .catch(cb);
+    }
 
-  logout(): void {
-    this.af.auth.signOut();
-  }
+    logout(): void {
+        console.log('debug logout...');
+        this.af.auth.signOut();
+    }
 
-  isLogged(): boolean {
-    return this.af.auth.currentUser != null;
-  }
+    isLogged(): boolean {
+        return this.af.auth.currentUser != null;
+    }
 
-  /**
-  ** @brief: Get user email + steamID32 from database via promise
-  */
-  getCurrentUser(): Promise<UserData> {
-    let currentUser = this.af.auth.currentUser;
-    return new Promise((resolve, reject) => {
-      if (currentUser) {
-        return this.ad.database.ref('/users/' + currentUser.uid).once('value')
-          .then(snapshot => {
-            console.log('debug here => ', snapshot.val());
-            let userData: UserData = {
-              id: snapshot.val().uid,
-              email: snapshot.val().email,
-              steamID32: snapshot.val().steamID32
+    /**
+     ** @brief: Get user email + steamID32 from database via promise
+     */
+    getCurrentUser(): Promise<UserData> {
+        let currentUser = this.af.auth.currentUser;
+        console.log('debug aa ==> ', this.af.auth.currentUser);
+        return new Promise((resolve, reject) => {
+            if (currentUser) {
+                console.log('debug currentUser not null');
+                return this.ad.database.ref('/users/' + currentUser.uid).once('value')
+                    .then(snapshot => {
+                        console.log('debug here => ', snapshot.val());
+                        let userData: UserData = {
+                            id: snapshot.val().uid,
+                            email: snapshot.val().email,
+                            steamID32: snapshot.val().steamID32
+                        };
+                        return resolve(userData);
+                    })
+                    .catch(err => {
+                        console.log('debug errror ===+> ', err);
+                        return reject(err);
+                    });
+            } else {
+                console.log('watuf');
+                return resolve(null);
             }
-            return resolve(userData);
-          })
-          .catch(err => {
-            return reject(err);
-          });
-      } else {
-        return resolve(null);
-      }
-    });
-  }
+        });
+    }
 }

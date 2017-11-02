@@ -66,13 +66,22 @@ export class ProfilPage {
     if (listMatches != null) {
       listMatches.forEach(element => {
         this.profileInfo.avgWinrate += 0;
-        this.profileInfo.avgKills += Number(element.kills) / Number(listMatches.length);
+        this.profileInfo.avgKills += element.kills;
         this.profileInfo.avgDeaths += element.deaths;
         this.profileInfo.avgAssists += element.assists;
         this.profileInfo.avgGPM += element.gold_per_min;
         this.profileInfo.avgXPM += element.xp_per_min;
         this.profileInfo.avgLH += element.last_hits;
       });
+      if (listMatches.length != 0) {
+        this.profileInfo.avgKills = Math.floor(this.profileInfo.avgKills / listMatches.length)
+        this.profileInfo.avgDeaths = Math.floor(this.profileInfo.avgDeaths / listMatches.length)
+        this.profileInfo.avgAssists = Math.floor(this.profileInfo.avgAssists / listMatches.length)
+        console.log(this.profileInfo.avgGPM);
+        this.profileInfo.avgGPM = Math.floor(this.profileInfo.avgGPM / listMatches.length);
+        this.profileInfo.avgXPM = Math.floor(this.profileInfo.avgXPM / listMatches.length)
+        this.profileInfo.avgLH = Math.floor(this.profileInfo.avgLH / listMatches.length)
+      }
     }
   }
 

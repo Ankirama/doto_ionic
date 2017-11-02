@@ -10,6 +10,7 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { RegisterPage } from '../pages/register/register';
 import { LoginPage } from '../pages/login/login';
 import { AuthPage } from '../pages/auth/auth';
+import { ProfilPage } from '../pages/profil/profil';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -17,6 +18,8 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AuthProvider } from '../providers/auth/auth';
+import { ProfileProvider } from '../providers/profile/profile';
+import {HttpModule} from '@angular/http';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyCk34f2nYQMUsbuKEJ_p7OPNQRLeA-G8Hg",
@@ -36,14 +39,16 @@ export const firebaseConfig = {
     TabsPage,
     AuthPage,
     LoginPage,
-    RegisterPage
+    RegisterPage,
+    ProfilPage
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireAuthModule,
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
+    HttpModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -54,13 +59,15 @@ export const firebaseConfig = {
     TabsPage,
     AuthPage,
     LoginPage,
-    RegisterPage
+    RegisterPage,
+    ProfilPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    AuthProvider
+    AuthProvider,
+    ProfileProvider
   ]
 })
 export class AppModule {}

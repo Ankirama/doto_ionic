@@ -36,4 +36,16 @@ export class OpenDotaProvider {
     getHeroData(hero_id) {
         return this.http.get('https://raw.githubusercontent.com/kronusme/dota2-api/master/data/heroes.json')
     }
+
+    getMatch(matchId: string) {
+        return this.http.get(this.apiURL + "/matches/" + matchId)
+        .map((res: Response) => {
+            console.log("debug => ", res.json());
+            return res.json();
+        })
+        .catch(error => {
+            console.log("debug error getMatch => ", error);
+            return Observable.throw(new Error('Unable to get your match... Try again later.'));
+        })
+    }
 }

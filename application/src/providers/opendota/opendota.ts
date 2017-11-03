@@ -68,7 +68,7 @@ export class OpenDotaProvider {
         })
     }
 
-    getMatch(matchId: string) {
+    getMatchById(matchId: string) {
         return this.http.get(this.apiURL + "/matches/" + matchId)
         .map((res: Response) => {
             console.log("debug => ", res.json());

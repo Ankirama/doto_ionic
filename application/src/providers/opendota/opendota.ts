@@ -16,6 +16,7 @@ export class MatchData {
     assists: number;
     deaths: number;
     matchID: string;
+    date: string
 }
 
 /*

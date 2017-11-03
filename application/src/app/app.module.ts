@@ -15,6 +15,7 @@ import { AuthPage } from '../pages/auth/auth';
 import { SteamLoginPage } from '../pages/steam-login/steam-login';
 import { MatchesPage } from '../pages/matches/matches';
 import { ModalSteamPage } from '../pages/modal-steam/modal-steam';
+import { ProfilPage } from '../pages/profil/profil';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -23,6 +24,8 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AuthProvider } from '../providers/auth/auth';
 import { OpenDotaProvider } from '../providers/opendota/opendota';
+import { ProfileProvider } from '../providers/profile/profile';
+import {HttpModule} from '@angular/http';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyCk34f2nYQMUsbuKEJ_p7OPNQRLeA-G8Hg",
@@ -46,6 +49,8 @@ export const firebaseConfig = {
     SteamLoginPage,
     MatchesPage,
     ModalSteamPage
+    RegisterPage,
+    ProfilPage
   ],
   imports: [
     BrowserModule,
@@ -69,6 +74,8 @@ export const firebaseConfig = {
     SteamLoginPage,
     MatchesPage,
     ModalSteamPage
+    RegisterPage,
+    ProfilPage
   ],
   providers: [
     StatusBar,
@@ -76,6 +83,8 @@ export const firebaseConfig = {
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AuthProvider,
     OpenDotaProvider
+    AuthProvider,
+    ProfileProvider
   ]
 })
 export class AppModule {}

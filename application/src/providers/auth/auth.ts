@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase } from 'angularfire2/database';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/observable/throw';
 
 /*
   Generated class for the AuthProvider provider.
@@ -11,7 +12,6 @@ import 'rxjs/add/operator/map';
 */
 
 export class UserData {
-  id: string;
   email: string;
   steamID32?: string;
 }
@@ -49,6 +49,20 @@ export class AuthProvider {
         return this.af.auth.currentUser != null;
     }
 
+    addSteamID(steamid32: string) {
+        return new Promise((resolve, reject) => {
+            this.af.authState.subscribe(currentUser => {
+                return this.ad.database.ref('/users/')
+                     .child(currentUser.uid)
+                     .set({email: currentUser.email, steamID32: steamid32})
+                     .then(resolve)
+                     .catch(reject)
+            }, error => {
+                return reject(error);
+            });
+        })
+    }
+
     /**
      ** @brief: Get user email + steamID32 from database via promise
      */
@@ -61,7 +75,6 @@ export class AuthProvider {
                         .then(snapshot => {
                             console.log('debug here => ', snapshot.val());
                             let userData: UserData = {
-                                id: snapshot.val().uid,
                                 email: snapshot.val().email,
                                 steamID32: snapshot.val().steamID32
                             };

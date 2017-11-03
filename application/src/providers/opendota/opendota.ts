@@ -32,4 +32,8 @@ export class OpenDotaProvider {
                 return Observable.throw(new Error('Unable to get your matches... Try again later.'));
             });
     }
+
+    getHeroData(hero_id) {
+        return this.http.get('https://raw.githubusercontent.com/kronusme/dota2-api/master/data/heroes.json')
+    }
 }

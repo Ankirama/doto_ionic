@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase } from 'angularfire2/database';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/observable/throw';
 
 /*
   Generated class for the AuthProvider provider.
@@ -11,7 +12,6 @@ import 'rxjs/add/operator/map';
 */
 
 export class UserData {
-  id: string;
   email: string;
   steamID32?: string;
 }
@@ -42,7 +42,6 @@ export class AuthProvider {
     }
 
     logout(): void {
-        console.log('debug logout...');
         this.af.auth.signOut();
     }
 
@@ -50,33 +49,45 @@ export class AuthProvider {
         return this.af.auth.currentUser != null;
     }
 
+    addSteamID(steamid32: string) {
+        return new Promise((resolve, reject) => {
+            this.af.authState.subscribe(currentUser => {
+                return this.ad.database.ref('/users/')
+                     .child(currentUser.uid)
+                     .set({email: currentUser.email, steamID32: steamid32})
+                     .then(resolve)
+                     .catch(reject)
+            }, error => {
+                return reject(error);
+            });
+        })
+    }
+
     /**
      ** @brief: Get user email + steamID32 from database via promise
      */
     getCurrentUser(): Promise<UserData> {
-        let currentUser = this.af.auth.currentUser;
-        console.log('debug aa ==> ', this.af.auth.currentUser);
         return new Promise((resolve, reject) => {
-            if (currentUser) {
-                console.log('debug currentUser not null');
-                return this.ad.database.ref('/users/' + currentUser.uid).once('value')
-                    .then(snapshot => {
-                        console.log('debug here => ', snapshot.val());
-                        let userData: UserData = {
-                            id: snapshot.val().uid,
-                            email: snapshot.val().email,
-                            steamID32: snapshot.val().steamID32
-                        };
-                        return resolve(userData);
-                    })
-                    .catch(err => {
-                        console.log('debug errror ===+> ', err);
-                        return reject(err);
-                    });
-            } else {
-                console.log('watuf');
-                return resolve(null);
-            }
+            this.af.authState.subscribe(currentUser => {
+                console.log('wowowoww => ', currentUser);
+                if (currentUser) {
+                    return this.ad.database.ref('/users/' + currentUser.uid).once('value')
+                        .then(snapshot => {
+                            console.log('debug here => ', snapshot.val());
+                            let userData: UserData = {
+                                email: snapshot.val().email,
+                                steamID32: snapshot.val().steamID32
+                            };
+                            console.log('debug email => ', userData.email);
+                            return resolve(userData);
+                        })
+                        .catch(err => {
+                            return reject(err);
+                        });
+                } else {
+                    return resolve(null);
+                }
+            });
         });
     }
 }

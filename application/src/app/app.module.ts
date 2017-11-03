@@ -25,7 +25,6 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AuthProvider } from '../providers/auth/auth';
 import { OpenDotaProvider } from '../providers/opendota/opendota';
 import { ProfileProvider } from '../providers/profile/profile';
-import {HttpModule} from '@angular/http';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyCk34f2nYQMUsbuKEJ_p7OPNQRLeA-G8Hg",
@@ -48,8 +47,7 @@ export const firebaseConfig = {
     RegisterPage,
     SteamLoginPage,
     MatchesPage,
-    ModalSteamPage
-    RegisterPage,
+    ModalSteamPage,
     ProfilPage
   ],
   imports: [
@@ -73,8 +71,7 @@ export const firebaseConfig = {
     RegisterPage,
     SteamLoginPage,
     MatchesPage,
-    ModalSteamPage
-    RegisterPage,
+    ModalSteamPage,
     ProfilPage
   ],
   providers: [
@@ -82,8 +79,7 @@ export const firebaseConfig = {
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AuthProvider,
-    OpenDotaProvider
-    AuthProvider,
+    OpenDotaProvider,
     ProfileProvider
   ]
 })

@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { LoadingController } from 'ionic-angular';
+
 
 import {ProfileProvider} from '../../providers/profile/profile'
 /**
@@ -13,17 +15,17 @@ export class ProfileInformations {
   profileName: string = "";
   profileAvatar: string = "";
   profileUrl: string = "";
-  wins: string = "";
-  losses: string = "";
-  winrate: string = "";
-  mmr: string = "";
-  avgWinrate: any = 0;
-  avgKills: any = 0;
-  avgDeaths: any = 0;
-  avgAssists: any = 0;
-  avgGPM: any = 0;
-  avgXPM: any = 0;
-  avgLH: any = 0;
+  wins: number = 0;
+  loses: number = 0;
+  winrate: number = 0;
+  mmr: number = 0;
+  avgWinrate: number = 0;
+  avgKills: number = 0;
+  avgDeaths: number = 0;
+  avgAssists: number = 0;
+  avgGPM: number = 0;
+  avgXPM: number = 0;
+  avgLH: number = 0;
 }
 
 @IonicPage()
@@ -33,12 +35,21 @@ export class ProfileInformations {
   providers: [ProfileProvider]
 })
 export class ProfilPage {
-  profileInfo: ProfileInformations;
+  public profileInfo: ProfileInformations;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public profile: ProfileProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController, 
+    public profile: ProfileProvider,) {
+    let loader = this.loadingCtrl.create({
+      content: "Loading your profile ..."
+    });
+    loader.present();
+    
     this.profileInfo = new ProfileInformations();
     this.loadSteamInfo();
+    this.loadWinLossInfo();
     this.loadRecentMatches();
+
+    loader.dismiss();
   }
 
   ionViewDidLoad() {
@@ -50,6 +61,14 @@ export class ProfilPage {
     .then(data => {
       console.log("data steam info => ", data);
       this.addProfileInfo(data);
+    })
+  }
+
+  loadWinLossInfo() {
+    this.profile.getWinsLosses()
+    .then(data => {
+      console.log("data win loss info => ", data);
+      this.addWinLossInfo(data);
     })
   }
 
@@ -81,6 +100,17 @@ export class ProfilPage {
         this.profileInfo.avgGPM = Math.floor(this.profileInfo.avgGPM / listMatches.length);
         this.profileInfo.avgXPM = Math.floor(this.profileInfo.avgXPM / listMatches.length)
         this.profileInfo.avgLH = Math.floor(this.profileInfo.avgLH / listMatches.length)
+      }
+    }
+  }
+
+  addWinLossInfo(winsLoses: any) {
+    console.log("Debug winLoses");
+    if (winsLoses != null) {
+      this.profileInfo.wins = winsLoses.win;
+      this.profileInfo.loses = winsLoses.lose;
+      if (winsLoses.win && winsLoses.lose) {
+        this.profileInfo.winrate = Math.round((winsLoses.win / (winsLoses.win + winsLoses.lose)) * 10000) / 100;
       }
     }
   }

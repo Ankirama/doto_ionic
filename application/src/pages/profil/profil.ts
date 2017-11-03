@@ -19,6 +19,7 @@ export class ProfileInformations {
   loses: number = 0;
   winrate: number = 0;
   mmr: number = 0;
+  nmbrMatches: number = 0;
   avgWinrate: number = 0;
   avgKills: number = 0;
   avgDeaths: number = 0;
@@ -92,6 +93,7 @@ export class ProfilPage {
         this.profileInfo.avgXPM += element.xp_per_min;
         this.profileInfo.avgLH += element.last_hits;
       });
+      this.profileInfo.nmbrMatches = listMatches.length;
       if (listMatches.length != 0) {
         this.profileInfo.avgKills = Math.floor(this.profileInfo.avgKills / listMatches.length)
         this.profileInfo.avgDeaths = Math.floor(this.profileInfo.avgDeaths / listMatches.length)

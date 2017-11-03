@@ -12,7 +12,6 @@
 
 </ion-header>
 
-
 <ion-content padding class="bg-style" *ngIf="profileInfo">
   <ion-grid>
     <ion-row>
@@ -22,60 +21,61 @@
       </ion-col>
       <ion-col>
         <div class="player-name">{{profileInfo.profileName}}</div>
-        <a href="{{profileInfo.profileUrl}}">See profile on Steam</a>
+        <a class="link-style" href="{{profileInfo.profileUrl}}">See profile on Steam</a>
       </ion-col>
     </ion-row>
     <ion-row>
       <ion-col>
         <div class="info-profil">wins</div>
-        <div class="wins-style">15</div>
+        <div class="wins-style">{{profileInfo.wins}}</div>
       </ion-col>
       <ion-col>
           <div class="info-profil">losses</div>
-          <div class="losses-style">15</div>
+          <div class="losses-style">{{profileInfo.loses}}</div>
       </ion-col>
       <ion-col> 
         <div class="info-profil">winrate</div>
-        <div class="rslt-style">52%</div>
+        <div class="rslt-style">{{profileInfo.winrate}}%</div>
       </ion-col>
       <ion-col>
         <div class="info-profil">~mmr</div>
         <div class="rslt-style">{{profileInfo.mmr}}</div>
       </ion-col>
     </ion-row>
+    <ion-row></ion-row>
     <ion-row>
-      <div class="title">Averages in last matches:</div>
+      <div class="title">Averages in last {{profileInfo.nmbrMatches}} matches :</div>
     </ion-row>
     <ion-row>
       <ion-col>
-        <div class="avg-info">winrate</div>
+        <div class="info-profil">winrate</div>
         <div>40%</div>
       </ion-col>
       <ion-col>
-        <div class="avg-info">kills</div>
-        <div>{{profileInfo.avgKills}}</div>
+        <div class="info-profil">kills</div>
+        <div class="wins-style">{{profileInfo.avgKills}}</div>
       </ion-col>
       <ion-col>
-        <div class="avg-info">deaths</div>
-        <div>{{profileInfo.avgDeaths}}</div>
+        <div class="info-profil">deaths</div>
+        <div class="losses-style">{{profileInfo.avgDeaths}}</div>
       </ion-col>
       <ion-col>
-        <div class="avg-info">assists</div>
-        <div>{{profileInfo.avgAssists}}</div>
+        <div class="info-profil">assists</div>
+        <div class="rslt-style">{{profileInfo.avgAssists}}</div>
       </ion-col>
     </ion-row>
     <ion-row>
       <ion-col>
-        <div class="avg-info">gold per min</div>
-        <div>{{profileInfo.avgGPM}}</div>
+        <div class="info-profil">gold per min</div>
+        <div class="rslt-style">{{profileInfo.avgGPM}}</div>
       </ion-col>
       <ion-col>
-        <div class="avg-info">xp per min</div>
-        <div>{{profileInfo.avgXPM}}</div>
+        <div class="info-profil">xp per min</div>
+        <div class="rslt-style">{{profileInfo.avgXPM}}</div>
       </ion-col>
       <ion-col>
-        <div class="avg-info">last hits</div>
-        <div>{{profileInfo.avgLH}}</div>
+        <div class="info-profil">last hits</div>
+        <div class="rslt-style">{{profileInfo.avgLH}}</div>
       </ion-col>
     </ion-row>
   </ion-grid>

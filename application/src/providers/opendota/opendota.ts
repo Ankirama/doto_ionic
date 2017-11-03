@@ -5,6 +5,20 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/do';
 
+export class HeroData {
+    name: string;
+    avatar: string;
+}
+
+export class MatchData {
+    hero: HeroData;
+    kills: number;
+    assists: number;
+    deaths: number;
+    matchID: string;
+    date: string
+}
+
 /*
   Generated class for the OpendotaProvider provider.
 
@@ -33,8 +47,25 @@ export class OpenDotaProvider {
             });
     }
 
-    getHeroData(hero_id) {
-        return this.http.get('https://raw.githubusercontent.com/kronusme/dota2-api/master/data/heroes.json')
+    getHeroData(hero_id): Promise<HeroData> {
+        return new Promise((resolve, reject) => {
+            return this.http.get('https://raw.githubusercontent.com/kronusme/dota2-api/master/data/heroes.json')
+            .subscribe(data => {
+                let hero = data.json()["heroes"].find(myObj => myObj.id == hero_id);
+                if (hero === undefined) {
+                    return reject(new Error("Unable to find your hero..."));
+                } else {
+                    let heroData: HeroData = {
+                        name: hero["localized_name"],
+                        avatar: "https://api.opendota.com/apps/dota2/images/heroes/" + hero["name"] + "_full.png"
+                    };
+                    return resolve(heroData);
+                }
+            }, error => {
+                console.log('getHeroData => ', error);
+                return reject(new Error("Unable to find your hero..."));
+            })
+        })
     }
 
     getMatch(matchId: string) {

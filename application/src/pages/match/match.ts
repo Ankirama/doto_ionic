@@ -14,8 +14,11 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'match.html',
 })
 export class MatchPage {
+  idMatch: string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+    //this.idMatch = navParams.get('id');
+    this.idMatch = "3535874423";
   }
 
   ionViewDidLoad() {

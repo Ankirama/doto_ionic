@@ -16,6 +16,7 @@ import { SteamLoginPage } from '../pages/steam-login/steam-login';
 import { MatchesPage } from '../pages/matches/matches';
 import { ModalSteamPage } from '../pages/modal-steam/modal-steam';
 import { ProfilPage } from '../pages/profil/profil';
+import { MatchPage } from '../pages/match/match';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -48,7 +49,8 @@ export const firebaseConfig = {
     SteamLoginPage,
     MatchesPage,
     ModalSteamPage,
-    ProfilPage
+    ProfilPage,
+    MatchPage
   ],
   imports: [
     BrowserModule,
@@ -72,7 +74,8 @@ export const firebaseConfig = {
     SteamLoginPage,
     MatchesPage,
     ModalSteamPage,
-    ProfilPage
+    ProfilPage,
+    MatchPage
   ],
   providers: [
     StatusBar,

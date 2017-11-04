@@ -50,7 +50,6 @@ export class OpenDotaProvider {
     getDotaAccount(steamID32: string) {
         return this.http.get(this.apiURL + '/players/' + steamID32)
             .map((res: Response) => {
-                console.log('debug ==> ', res.json());
                 return res.json();
             })
             .catch(error => {
@@ -62,7 +61,6 @@ export class OpenDotaProvider {
     getWinsLosses(steamID32: string) {
         return this.http.get(this.apiURL + '/players/' + steamID32 + "/wl")
             .map((res: Response) => {
-                console.log('debug ==> ', res.json());
                 return res.json();
             })
             .catch(error => {
@@ -74,7 +72,6 @@ export class OpenDotaProvider {
     getRecentMatches(steamID32: string) {
         return this.http.get(this.apiURL + '/players/' + steamID32 + "/recentMatches")
             .map((res: Response) => {
-                console.log('debug ==> ', res.json());
                 return res.json();
             })
             .catch(error => {

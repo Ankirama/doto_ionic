@@ -6,20 +6,21 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>Find your username</ion-title>
-  </ion-navbar>
+    <ion-navbar>
+        <ion-title>Find your username</ion-title>
+    </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-  <form [formGroup]="steamForm" (ngSubmit)="onSubmit(steamForm.value)">
-      <ion-item>
-          <ion-label floating>Username</ion-label>
-          <ion-input formControlName="username" type="text"></ion-input>
-      </ion-item>
+    <form [formGroup]="steamForm" (ngSubmit)="onSubmit(steamForm.value)">
+        <ion-item>
+            <ion-label floating>Username</ion-label>
+            <ion-input formControlName="username" type="text"></ion-input>
+        </ion-item>
 
-      <button ion-button full color="primary" [disabled]="!steamForm.valid" style="margin-top: 20px;" type="submit">Find a steam account</button>
-  </form>
+        <button ion-button full color="primary" [disabled]="!steamForm.valid" style="margin-top: 20px;" type="submit">Find a steam account</button>
+    </form>
+    <button (click)="logout()" ion-button color="danger" block>Log out</button>
 </ion-content>

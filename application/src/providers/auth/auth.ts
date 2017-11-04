@@ -22,6 +22,9 @@ export class AuthProvider {
     constructor(private af: AngularFireAuth, private ad: AngularFireDatabase) {
     }
 
+    /**
+     * Try to log a user via firebase auth
+     */
     loginWithEmail(credentials: any) {
         return this.af.auth.signInWithEmailAndPassword(credentials.email, credentials.password);
     }
@@ -48,6 +51,9 @@ export class AuthProvider {
         return this.af.auth.currentUser != null;
     }
 
+    /**
+     * Add a steamID32 in firebase database
+     */
     addSteamID(steamid32: string) {
         return new Promise((resolve, reject) => {
             this.af.authState.subscribe(currentUser => {
@@ -68,7 +74,6 @@ export class AuthProvider {
     getCurrentUser(): Promise<UserData> {
         return new Promise((resolve, reject) => {
             this.af.authState.subscribe(currentUser => {
-                console.log('wowowoww => ', currentUser);
                 if (currentUser) {
                     return this.ad.database.ref('/users/' + currentUser.uid).once('value')
                         .then(snapshot => {

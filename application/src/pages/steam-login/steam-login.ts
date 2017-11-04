@@ -96,6 +96,11 @@ export class SteamLoginPage {
     }
   }
 
+  logout() {
+    this.auth.logout(); 
+    location.reload(); 
+  }
+
   getUserSummary(steamid) {
     let url = "/user/?key=" + this.apiKey + "&steamids=" + steamid;
     return this.http.get(url);

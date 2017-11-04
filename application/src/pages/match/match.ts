@@ -27,9 +27,10 @@ export class MatchPage {
   hero: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private auth: AuthProvider, private api: OpenDotaProvider) {
+    console.log("recapMatch => ", navParams);
     this.recapMatch = navParams.get('item');
     console.log("recapMatch => ", this.recapMatch);
-    this.reloadData(this.recapMatch.match_id);
+    this.reloadData(this.recapMatch.matchID);
   }
 
   getPlayersFromJson(match) {

@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, LoadingController } from 'ionic-angular';
 import { AuthProvider } from '../../providers/auth/auth';
 import { OpenDotaProvider, HeroData, MatchData } from '../../providers/opendota/opendota';
+import { MatchPage } from '../../pages/match/match';
+
 import 'rxjs/add/observable/throw';
 
 /**
@@ -98,6 +100,12 @@ export class MatchesPage {
     this.loading.present();
     this.offset += 1;
     this.getMatches(this.steamID32, this.offset, this.limit);
+  }
+
+  itemTapped(event, item) {
+    this.navCtrl.push(MatchPage, {
+      item: item
+    })
   }
 
   ionViewDidLoad() {

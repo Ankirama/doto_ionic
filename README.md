@@ -1,6 +1,6 @@
 <h1 align="center">
   <br>
-  <a href="#"><img src="https://raw.githubusercontent.com/Ankirama/doto_ionic/master/img/dota2-logo.png" alt="Doto Ionic logo" width="200"></a>
+  <a href="#"><img src="https://github.com/Ankirama/doto_ionic/blob/master/img/dota2-logo.png" alt="Doto Ionic logo" width="200"></a>
   <br>
   Doto 2 Ionic
   <br>

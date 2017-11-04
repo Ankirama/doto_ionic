@@ -105,5 +105,13 @@ Ionic 3
 
 ### Match (détails)
 
+- Récupération de certains détails du match grâce à navParams (on arrive depuis la page des matchs) et à la classe MatchData (qui contient l'id, la date, la durée, ...).
+- Provider `opendota.ts` pour récupèrer les informations sur le match grâce à son id.
+  - Si le match ne peut pas être récupéré grâce à l'api d'opendota on affiche une alerte pour prévenir l'utilisateur.
+- On récupére la liste des joueurs de chaque équipe: 
+  - Si le joueur n'a pas de compte public dota 2 (les informations concernant son compte ne peuvent être récupérés) son nom sera `Anonym`
+- Loading Controller pour afficher la page seulement quand toutes les informations sont chargées.
+
+
 ### Profil
 

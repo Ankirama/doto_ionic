@@ -16,7 +16,8 @@ export class MatchData {
     assists: number;
     deaths: number;
     matchID: string;
-    date: string
+    date: string;
+    duration: string;
 }
 
 /*
@@ -32,7 +33,6 @@ export class OpenDotaProvider {
     error: string = null;
 
     constructor(public http: Http) {
-        console.log('Hello OpendotaProvider Provider');
     }
 
     getMatches(steamID32: string, offset: number = 0, limit: number = 10) {
@@ -62,7 +62,7 @@ export class OpenDotaProvider {
                     return resolve(heroData);
                 }
             }, error => {
-                console.log('getHeroData => ', error);
+                console.log('getHeroData error => ', error);
                 return reject(new Error("Unable to find your hero..."));
             })
         })

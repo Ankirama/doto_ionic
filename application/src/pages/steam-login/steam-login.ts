@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, ModalController } from 'ionic-angular';
+import { IonicPage, NavController, ModalController, LoadingController } from 'ionic-angular';
 import { FormBuilder, FormGroup} from '@angular/forms';
 import { Http } from '@angular/http';
 import { BigNumber } from 'bignumber.js'
@@ -29,8 +29,9 @@ export class SteamLoginPage {
 
   apiKey: string = "459CB95F42E003F566ED61C775D0C2CF";  
   steamForm: FormGroup;
+  loading;
 
-  constructor(public navCtrl: NavController, public formBuilder: FormBuilder, private http: Http, private modalCtrl : ModalController, private auth: AuthProvider) {
+  constructor(public navCtrl: NavController, public formBuilder: FormBuilder, private http: Http, private modalCtrl : ModalController, private auth: AuthProvider, private loadingCtrl: LoadingController) {
     this.steamForm = formBuilder.group({
       username: [''],
     });
@@ -38,21 +39,23 @@ export class SteamLoginPage {
 
   onSubmit(value: any): void {
     if(this.steamForm.valid) {
-
+      this.loading = this.loadingCtrl.create({
+        content: 'Please wait...'
+      });
+      this.loading.present();
       this.http.get("/resolveVanity/?key=" + this.apiKey + "&vanityurl=" + value.username)
         .subscribe(data => {
-          console.log('data => ', data.json());
-          console.log('debug ==> ', data.json()["response"]);
           let steamid = data.json()["response"]["steamid"];
-          console.log('debug steamid => ', steamid);
           if (steamid === undefined) {
-            alert('Unable to find your username, please try again');            
+            alert('Unable to find your username, please try again');
+            this.loading.dismiss();
           } else {
             let steamid32 = new BigNumber(steamid).minus("76561197960265728").toString();
             this.getUserSummary(steamid).subscribe(data => {
               let players = data.json()["response"]["players"];
               if (players == undefined || players.length == 0)  {
                 alert('Unable to find your username, please try again');
+                this.loading.dismiss();
               } else {
                 let steamUser = {
                   steamid32: steamid32,
@@ -64,23 +67,29 @@ export class SteamLoginPage {
                   if (isValid) {
                     this.auth.addSteamID(steamid32)
                     .then(snapshot => {
+                      this.loading.dismiss();
                       this.navCtrl.setRoot(MatchesPage);
                     })
                     .catch(error => {
+                      this.loading.dismiss();
                       console.log('dafuk => ', error);
                       alert('unable to set your steamid, please try again later.');
                     });
                   }
                 });
+                this.loading.dismiss();
                 modal.present();
               }
             }, err => {
+              this.loading.dismiss();
               console.log('error steam-login => ', err);
               alert('An error occured, please try again later...');
             });
+            this.loading.dismiss();
             console.log("steamid32 => ", steamid32);
           }
         }, error => {
+          this.loading.dismiss();
           console.log('error => ', error);
           alert('An error occured, please try again later...');
         });
@@ -93,11 +102,9 @@ export class SteamLoginPage {
   }
 
   ionViewDidEnter() {
-    console.log('reset form');
     this.steamForm.reset();
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad SteamLoginPage');
   }
 }

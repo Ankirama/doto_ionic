@@ -14,22 +14,47 @@
 
 
 <ion-content padding>
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
     <div *ngIf="gotError == false">
+        <ion-row *ngIf="matches.length == 0">
+            <p text-center>No matches found.</p>
+        </ion-row>
         <ion-list *ngIf="steamID32 != null">
             <ion-item *ngFor="let match of matches">
-                <p>{{match.match_id}}</p>
+                <ion-card *ngIf="match.error == null">
+                    <img src="{{match.hero.avatar}}">
+                    <ion-card-content text-center>
+                        <ion-card-title>{{match.hero.name}}</ion-card-title>
+                        <p>{{match.date}}</p>
+                        <ion-row text-center>
+                            <ion-col>Kills</ion-col>
+                            <ion-col>Deaths</ion-col>
+                            <ion-col>Assists</ion-col>
+                            <ion-col>Duration</ion-col>
+                        </ion-row>
+                        <ion-row text-center>
+                            <ion-col>{{match.kills}}</ion-col>
+                            <ion-col>{{match.deaths}}</ion-col>
+                            <ion-col>{{match.assists}}</ion-col>
+                            <ion-col>{{match.duration}}</ion-col>
+                        </ion-row>
+                    </ion-card-content>
+                </ion-card>
+                <ion-card *ngIf="match.error != null">
+                    <p>Unable to load your match...</p>
+                </ion-card>
             </ion-item>
         </ion-list>
         <ion-row *ngIf="steamID32 != null">
-            <button (click)="loadMoreData()" ion-button blcok>Load more matches</button>
+            <button (click)="loadMoreData()" ion-button block>Load more matches</button>
         </ion-row>
         <ion-row *ngIf="steamID32 == null">
-            <button (click)="dotaAccount()" ion-button blcok>Add your dota Account</button>
+            <button (click)="dotaAccount()" ion-button block>Add your dota Account</button>
         </ion-row>
     </div>
     <div *ngIf="gotError == true">
-        <ion-row>
-            <button (click)="reloadData()" ion-button blcok>Reload Matches</button>
-        </ion-row>
+        <button (click)="reloadData()" ion-button block>Reload Matches</button>
     </div>
 </ion-content>

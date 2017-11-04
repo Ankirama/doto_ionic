@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController } from 'ionic-angular';
+import { IonicPage, NavController, LoadingController } from 'ionic-angular';
 import { AuthProvider } from '../../providers/auth/auth';
-import { OpenDotaProvider } from '../../providers/opendota/opendota';
+import { OpenDotaProvider, HeroData, MatchData } from '../../providers/opendota/opendota';
 import 'rxjs/add/observable/throw';
 
 /**
@@ -24,48 +24,82 @@ export class MatchesPage {
   gotError = false;
   offset = 0;
   limit = 10;
+  loading;
 
-  constructor(public navCtrl: NavController, private auth: AuthProvider, private api: OpenDotaProvider) {
+  constructor(public navCtrl: NavController, private auth: AuthProvider, private api: OpenDotaProvider, private loadingCtrl: LoadingController) {
     this.reloadData();
   }
 
   getMatches(steamID32, offset = 0, limit = 10) {
-    this.api.getMatches(steamID32, offset, limit).subscribe(data => {
-        console.log('debug data ==> ', data);
-        this.matches = this.matches.concat(data);
+    this.api.getMatches(steamID32, offset * limit, limit).subscribe(data => {
+        data.forEach(match => {
+          this.api.getHeroData(match["hero_id"])
+            .then(hero => {
+              let minutes = Math.floor(parseInt(match["duration"]) / 60);
+              let seconds = parseInt(match["duration"]) % 60;
+              let tmp: MatchData = {
+                hero: hero,
+                kills: match["kills"],
+                assists: match["assists"],
+                deaths: match["deaths"],
+                matchID: match["match_id"],
+                date: (new Date(parseInt(match["start_time"]) * 1000)).toDateString(),
+                duration: minutes + ":" + (seconds < 10 ? "0" + seconds : seconds)
+              };
+              this.matches.push(tmp);
+            })
+            .catch(error => {
+              this.matches.push({error: true});
+              console.log('error during hero find => ', error);
+            });
+        });
+        this.loading.dismiss();
     }, error => {
+      this.loading.dismiss();
       this.gotError = true;
       console.log('debug error getMatches => ', error);
-      alert('Unable to plouf');
-//      alert(error);
+      alert(error);
     });
   }
 
+  doRefresh(refresher) {
+    this.reloadData();
+    setTimeout(() => {
+      refresher.complete();
+    }, 1000);
+  }
+
   reloadData() {
+    this.loading = this.loadingCtrl.create({
+      content: 'Please wait...'
+    });
+    this.loading.present();
     this.gotError = false;
     this.auth.getCurrentUser()
     .then(data => {
         if (data !== null) {
             this.email = data.email;
             this.steamID32 = data.steamID32 != undefined ? data.steamID32 : null;
-            this.getMatches(this.steamID32, 0, this.limit);
+            this.getMatches(this.steamID32, 0, (this.offset + 1) * this.limit);
+        } else {
+          this.loading.dismiss();
         }
     })
     .catch(err => {
+      this.loading.dismiss();
         console.log('debug error matches => ', err);
     });
   }
 
   loadMoreData() {
+    this.loading = this.loadingCtrl.create({
+      content: 'Please wait...'
+    });
+    this.loading.present();
     this.offset += 1;
     this.getMatches(this.steamID32, this.offset, this.limit);
   }
 
-  dotaAccount() {
-    
-  }
-
   ionViewDidLoad() {
-    console.log('ionViewDidLoad MatchesPage');
   }
 }

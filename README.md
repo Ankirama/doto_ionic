@@ -36,11 +36,21 @@ Le projet a pour but de permettre aux joueurs de [Dota 2](http://www.dota2.com/p
 
 ## Sommaire
 
-- [Fonctionnalités](#fonctionnalites)
+- [Fonctionnalités](#fonctionnalités)
 - [Détails](#details)
 - [Equipe](#equipe)
 
 ## Fonctionnalités
+
+### Front-end
+
+
+### Back-end
+
+- Firebase Authentification
+- Firebase Database
+- Firebase Push
+- API [OpenDota](https://docs.opendota.com/)
 
 ## Détails
 

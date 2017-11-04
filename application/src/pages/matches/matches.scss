@@ -6,6 +6,26 @@ page-matches {
             text-align: center;
             background-color: transparent;
         }
+
+        .card-title {
+            color: rgb(245, 245, 245)
+        }
+
+        .kills-style {
+            color: rgb(102, 187, 106);
+        }
+
+        .deaths-style {
+            color: rgb(255, 76, 76);
+        }
+
+        .gpm-style {
+            color: rgb(229, 193, 0);
+        }
+
+        .background-transparent {
+            background-color: transparent;
+        }
     }
 }
 

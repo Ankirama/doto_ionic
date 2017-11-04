@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, LoadingController, InfiniteScroll } from 'ionic-angular';
 import { AuthProvider } from '../../providers/auth/auth';
 import { OpenDotaProvider, HeroData, MatchData } from '../../providers/opendota/opendota';
 import { MatchPage } from '../../pages/match/match';
@@ -92,7 +92,7 @@ export class MatchesPage {
         console.log('debug error matches => ', err);
     });
   }
-
+/*
   loadMoreData() {
     this.loading = this.loadingCtrl.create({
       content: 'Please wait...'
@@ -100,6 +100,12 @@ export class MatchesPage {
     this.loading.present();
     this.offset += 1;
     this.getMatches(this.steamID32, this.offset, this.limit);
+  }
+*/
+  loadMoreData(infiniteScroll: InfiniteScroll) {
+    this.offset += 1;
+    this.getMatches(this.steamID32, this.offset, this.limit);
+    infiniteScroll.complete();
   }
 
   itemTapped(event, item) {

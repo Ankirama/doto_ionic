@@ -97,11 +97,11 @@ export class MatchPage {
             } else {
               this.getMatch(this.recapMatch.matchID)
               .then(() => {
-
+                this.loading.dismiss();
               })
               .catch(error => {
                 this.loading.dismiss();
-              })
+              });
             }
         } else {
           this.loading.dismiss();

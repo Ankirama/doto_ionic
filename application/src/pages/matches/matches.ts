@@ -75,7 +75,7 @@ export class MatchesPage {
   reloadData() {
     this.loading = this.loadingCtrl.create({
       content: 'Please wait...',
-      duration: 5000
+      duration: 20000
     });
     this.loading.present();
     this.gotError = false;
@@ -99,7 +99,7 @@ export class MatchesPage {
     this.offset += 1;
     this.loading = this.loadingCtrl.create({
       content: 'Please wait...',
-      duration: 5000
+      duration: 20000
     });
     this.loading.present();
     this.getMatches(this.steamID32, this.offset, this.limit);

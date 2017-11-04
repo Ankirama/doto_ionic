@@ -42,6 +42,8 @@ Le projet a pour but de permettre aux joueurs de [Dota 2](http://www.dota2.com/p
 
 ## Fonctionnalités
 
+Ionic 3
+
 ### Front-end
 
 - Menu onglets (pas d'hamburger menu)
@@ -49,6 +51,9 @@ Le projet a pour but de permettre aux joueurs de [Dota 2](http://www.dota2.com/p
 - Providers pour Firebase et OpenDota
 - Modal controller
 - Push notification
+- Gestion des erreurs en affichant des alertes
+- Pull refresh
+- Infinte scroll pour afficher les items
 - Pages
   - Détails d'un item
   - Liste de plusieurs items
@@ -66,7 +71,28 @@ Le projet a pour but de permettre aux joueurs de [Dota 2](http://www.dota2.com/p
 
 ### Connexion / Inscritpion
 
+- `ion-tabs` pour choisir entre connexion / inscription
+- Provider `auth.ts` pour créer, modifier ou récupérer un compte via Firebase Auth et Database
+- Loading controller lors des appels au provider
+- Validation des formulaire grâce à `Validators`
+  - Vérification du format de l'email
+  - Vérification de la taille minimale du mot de passe
+- Alerte personnalisée si la combinaison Email / mot de passe n'est pas correcte
+- Réinitialisation des champs des formulaires quand on change de page
+
 ### Matches (liste)
+
+- Pull refresh pour pouvoir rafraichir les données (grâce à `ion-refresher`)
+- Provider `auth.ts` pour récupérer les informations de l'utilisateur (princiaplement le steamID32 nécessaire pour récupérer les informations du joueur)
+  - Si pas de steamID32 sur le compte dans ce cas on affiche un bouton pour le rajouter
+  - Si l'utilisateur n'a pas de matchs, un message s'affiche
+  - Si un problème quelconque survient dans ce cas on affiche une alerte et un bouton pour rafraichir la page
+  - Si un match en particulier ne se charge pas un message s'affiche à la place des informations du match
+- Provider `opendota.ts` pour récuperer les informations sur les matches avec de la pagination (récupération de 10 matches par 10 matches)
+- Infinite Scroll pour afficher plus de matches en augmentant l'offset utilisé par `opendota.ts` pour récupérer les matches
+- Utilisation de `ion-list` et `ion-card` pour afficher chaque match
+- En appuyant sur un match on est redirigé vers les détails de ce match
+- Loading Controller lors des ajouts des matches
 
 ### Match (détails)
 

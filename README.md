@@ -10,7 +10,7 @@
 
 <p align="center">
   <a href="#">
-    <img src="https://img.shields.io/badge/groupe-14-ff69b4.svg" alt="Groupe numéro 14" height="18">
+    <img src="https://img.shields.io/badge/groupe-14-ff69b4.svg" alt="Groupe 14" height="18">
   </a>
   <a href="https://badge.fury.io/js/ionic">
     <img src="https://badge.fury.io/js/ionic.svg" alt="npm version" height="18">

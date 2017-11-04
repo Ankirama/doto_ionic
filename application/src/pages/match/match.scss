@@ -1,0 +1,83 @@
+page-match {
+    ion-content {
+
+        .game-info {
+            color: rgb(245, 245, 245);
+            font-size: 12px;
+            text-align: center;
+        }
+
+        .radiant-score {
+            color: rgb(102, 187, 106);
+            font-size: 30px;
+            text-align: center;
+        }
+
+        .dire-score {
+            color: rgb(255, 76, 76);
+            font-size: 30px;
+            text-align: center;
+        }
+
+        .title-victory {
+            color: rgb(245, 245, 245);
+            text-align: center;
+            font-size: 26px;
+        }
+
+        .list-title {
+            color: rgb(245, 245, 245);
+            font-size: 12px;
+            background-color: transparent;
+            text-align: center;
+            text-transform: uppercase;
+        }
+
+        .list-title-gold {
+            color: rgb(229, 193, 0);
+            font-size: 12px;
+            background-color: transparent;
+            text-align: center; 
+            text-transform: uppercase;
+        }
+
+        .line-break{
+            overflow: inherit ;
+            text-overflow: inherit ;
+            white-space: normal;
+          }
+
+        .list-player {
+            color: rgb(245, 245, 245);
+            font-size: 12px;
+            text-align: center;
+            background-color: transparent;
+            white-space:normal;
+        }
+
+        .list-player-gold {
+            color: rgb(229, 193, 0);
+            font-size: 12px;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        .title-radiant {
+            color: rgb(102, 187, 106);
+            font-size: 20px;
+            text-align: start;
+        }
+
+        .title-dire {
+            color: rgb(255, 76, 76);
+            font-size: 20px;
+            text-align: start;
+        }
+    }
+
+}
+
+.bg-style {
+    background-color: rgb(38, 40, 56);
+}
+

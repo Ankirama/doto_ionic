@@ -112,7 +112,6 @@ export class ProfilPage {
   }
 
   addWinLossInfo(winsLoses: any) {
-    console.log("Debug winLoses");
     if (winsLoses != null) {
       this.profileInfo.wins = winsLoses.win;
       this.profileInfo.loses = winsLoses.lose;
@@ -123,7 +122,6 @@ export class ProfilPage {
   }
 
   addProfileInfo(steamInfo: any) {
-    console.log("Debug addProfileInfo");
     if (steamInfo != null) {
       if (steamInfo.profile != null) {
         this.profileInfo.profileName = steamInfo.profile.personaname;

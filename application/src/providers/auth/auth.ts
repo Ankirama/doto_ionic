@@ -68,7 +68,6 @@ export class AuthProvider {
     getCurrentUser(): Promise<UserData> {
         return new Promise((resolve, reject) => {
             this.af.authState.subscribe(currentUser => {
-                console.log('wowowoww => ', currentUser);
                 if (currentUser) {
                     return this.ad.database.ref('/users/' + currentUser.uid).once('value')
                         .then(snapshot => {

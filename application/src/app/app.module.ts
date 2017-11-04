@@ -22,7 +22,6 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AuthProvider } from '../providers/auth/auth';
 import { OpenDotaProvider } from '../providers/opendota/opendota';
-import { ProfileProvider } from '../providers/profile/profile';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyCk34f2nYQMUsbuKEJ_p7OPNQRLeA-G8Hg",
@@ -73,8 +72,7 @@ export const firebaseConfig = {
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AuthProvider,
-    OpenDotaProvider,
-    ProfileProvider
+    OpenDotaProvider
   ]
 })
 export class AppModule {}

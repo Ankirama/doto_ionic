@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { LoadingController } from 'ionic-angular';
+import { AuthProvider } from '../../providers/auth/auth';
+import { OpenDotaProvider } from '../../providers/opendota/opendota';
+import 'rxjs/add/observable/throw';
 
-
-import {ProfileProvider} from '../../providers/profile/profile'
 /**
  * Generated class for the ProfilPage page.
  *
@@ -33,13 +34,12 @@ export class ProfileInformations {
 @Component({
   selector: 'page-profil',
   templateUrl: 'profil.html',
-  providers: [ProfileProvider]
 })
 export class ProfilPage {
   public profileInfo: ProfileInformations;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController, 
-    public profile: ProfileProvider,) {
+    public api: OpenDotaProvider, public auth: AuthProvider) {
     let loader = this.loadingCtrl.create({
       content: "Loading your profile ..."
     });
@@ -58,31 +58,36 @@ export class ProfilPage {
   }
 
   loadSteamInfo() {
-    this.profile.getDotaAccount()
-    .then(data => {
+    this.api.getDotaAccount(this.steamID32)
+    .subscribe(data => {
       console.log("data steam info => ", data);
       this.addProfileInfo(data);
+    }, error => {
+      alert("Unable to load your profile, please try again later");
     })
   }
 
   loadWinLossInfo() {
-    this.profile.getWinsLosses()
-    .then(data => {
+    this.api.getWinsLosses(this.steamID32)
+    .subscribe(data => {
       console.log("data win loss info => ", data);
       this.addWinLossInfo(data);
+    }, error => {
+      alert("Unable to load your profile, please try again later");
     })
   }
 
   loadRecentMatches() {
-    this.profile.getRecentMatches()
-    .then(data => {
+    this.api.getRecentMatches(this.steamID32)
+    .subscribe(data => {
       console.log("data recent matches => ", data);
       this.addRecentMatchesInfo(data);
+    }, error => {
+      alert("Unable to load your profile, please try again later");
     })
   }
 
   addRecentMatchesInfo(listMatches: any) {
-    console.log("Debug addRecentMatchesInfo");
     if (listMatches != null) {
       listMatches.forEach(element => {
         this.profileInfo.avgWinrate += 0;

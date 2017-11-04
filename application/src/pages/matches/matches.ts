@@ -66,6 +66,7 @@ export class MatchesPage {
   }
 
   doRefresh(refresher) {
+    this.matches = [];
     this.reloadData();
     setTimeout(() => {
       refresher.complete();

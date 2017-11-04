@@ -12,7 +12,10 @@
   <a href="https://badge.fury.io/js/ionic">
     <img src="https://badge.fury.io/js/ionic.svg" alt="npm version" height="18">
   </a>
-  <a href="https://github.com/Ankirama/doto_ionic/issues">
-    <img src="https://img.shields.io/github/issues-closed/Ankirama/doto_ionic.svg" alt="issues closed" height="18">
+  <a href="https://doto-ionic.firebaseio.com/">
+    <img src="https://img.shields.io/badge/backend-firebase-blue.svg" alt="Backend firebase" height="18">
+  </a>
+  <a href="#">
+    <img src="https://img.shields.io/badge/release-1.0-brightgreen.svg" alt="Release version" height="18">
   </a>
 </p>

@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, LoadingController, InfiniteScroll } from 'ionic-angular';
 import { AuthProvider } from '../../providers/auth/auth';
-import { OpenDotaProvider, HeroData, MatchData } from '../../providers/opendota/opendota';
-import { ProfilPage } from '../profil/profil';
+import { OpenDotaProvider, MatchData } from '../../providers/opendota/opendota';
+import { SteamLoginPage } from '../steam-login/steam-login';
 import { MatchPage } from '../../pages/match/match';
 
 import 'rxjs/add/observable/throw';
@@ -116,7 +116,7 @@ export class MatchesPage {
   }
 
   dotaAccount() {
-    this.navCtrl.setRoot(ProfilPage);
+    this.navCtrl.setRoot(SteamLoginPage);
   }
 
   ionViewDidLoad() {

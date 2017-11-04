@@ -30,6 +30,8 @@ Le projet a pour but de permettre aux joueurs de [Dota 2](http://www.dota2.com/p
 
 ---
 
+## Screenshot de l'application
+
 ![screenshot](https://github.com/Ankirama/doto_ionic/blob/master/img/screenshot.png)
 
 ## Sommaire

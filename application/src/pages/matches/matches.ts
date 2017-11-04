@@ -74,7 +74,8 @@ export class MatchesPage {
 
   reloadData() {
     this.loading = this.loadingCtrl.create({
-      content: 'Please wait...'
+      content: 'Please wait...',
+      duration: 5000
     });
     this.loading.present();
     this.gotError = false;
@@ -93,18 +94,14 @@ export class MatchesPage {
         console.log('debug error matches => ', err);
     });
   }
-/*
-  loadMoreData() {
-    this.loading = this.loadingCtrl.create({
-      content: 'Please wait...'
-    });
-    this.loading.present();
-    this.offset += 1;
-    this.getMatches(this.steamID32, this.offset, this.limit);
-  }
-*/
+
   loadMoreData(infiniteScroll: InfiniteScroll) {
     this.offset += 1;
+    this.loading = this.loadingCtrl.create({
+      content: 'Please wait...',
+      duration: 5000
+    });
+    this.loading.present();
     this.getMatches(this.steamID32, this.offset, this.limit);
     infiniteScroll.complete();
   }

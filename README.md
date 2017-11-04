@@ -136,3 +136,15 @@ Ionic 3
 ## Exemple
 
 Pour pouvoir voir des parties de Dota 2 il faut connaitre quelqu'un qui joue, pour cela vous pouvez tester avec le compte `Ankirama` par exemple
+
+### Exemple d'utilisation
+
+- Se connecter ou créer un compte
+- Lors de la première connection, comme aucun compte steam n'est lié à votre compte, les pages `Matches` et `Profile` n'auront pas d'informations
+- Se rendre sur `Account`
+  - Rentrer un pseudo Steam. A noter que la personne doit jouer à Dota 2 et avoir un compte public (pour la démo utiliser `Ankirama`.
+  - Si les 2 conditions (jouer à Dota 2 et compte public) ne sont pas remplis les pages seront encore vides (pas de données à récupérer) => dans ce cas rentrer un autre nom de compte sur `Account`
+- Si on a un compte valide dans: 
+  - `Matches` on aura la liste des matchs de l'utilisateur avec le héro joué (photo et nom), la date du match, les stats du joueur et la durée du match.
+  - En appuyant sur le match on accède à la page détaillée du match qu affiche les données de tous les joueurs, les score des chaque équipe, si le match est une victoire ou non pour le compte utilisé et l'id du match si l'on veut le retrouver.
+  - `Profile` affiche les données de l'utilisateur (nom et photo de profil Steam). 

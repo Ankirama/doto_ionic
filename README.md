@@ -53,7 +53,7 @@ Ionic 3
 - Push notification
 - Gestion des erreurs en affichant des alertes
 - Pull refresh
-- Infinte scroll pour afficher les items
+- Infinite scroll pour afficher plus d'items
 - Pages
   - Détails d'un item
   - Liste de plusieurs items

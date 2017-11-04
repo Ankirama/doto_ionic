@@ -50,7 +50,7 @@ Le projet a pour but de permettre aux joueurs de [Dota 2](http://www.dota2.com/p
 - Modal controller
 - Push notification
 - Pages
-  - Détails d'un item
+  - Détails d'un item
   - Liste de plusieurs items
   - Connexion / inscription
 

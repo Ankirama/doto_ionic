@@ -180,4 +180,11 @@ export class ProfilPage {
       }
     }
   }
+
+  doRefresh(refresher) {
+    this.reloadData();
+    setTimeout(() => {
+      refresher.complete();
+    }, 1000);
+  }
 }

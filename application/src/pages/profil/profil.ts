@@ -38,33 +38,54 @@ export class ProfileInformations {
 export class ProfilPage {
   public profileInfo: ProfileInformations;
   private steamID32: string;
+  private loading;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController, 
     public api: OpenDotaProvider, public auth: AuthProvider) {
-    let loader = this.loadingCtrl.create({
-      content: "Loading your profile ..."
-    });
+      this.reloadData();
+  }
+
+  reloadData() {
     this.profileInfo = new ProfileInformations();
-    loader.present();
+    this.loading = this.loadingCtrl.create({
+      content: 'Please wait...',
+      duration: 5000
+    });
+    this.loading.present();
     this.auth.getCurrentUser()
     .then(data => {
         if (data !== null) {
             this.steamID32 = data.steamID32 != undefined ? data.steamID32 : null;
             if (this.steamID32 == null) {
               alert("Unable to find your dota account, you must add it first.");
-              loader.dismiss();
+              this.loading.dismiss();
             } else {
-              this.loadSteamInfo();
-              this.loadWinLossInfo();
-              this.loadRecentMatches();
-              loader.dismiss();
+              this.loadSteamInfo()
+              .then(() => {
+                this.loadWinLossInfo()
+                .then(() => {
+                  this.loadRecentMatches()
+                  .then(() => {
+                    this.loading.dismiss();
+                  })
+                  .catch(error => {
+                    this.loading.dismiss();
+                  });
+                })
+                .catch(error => {
+                  this.loading.dismiss();
+                })
+              })
+              .catch(error => {
+                this.loading.dismiss();
+              });
             }
         } else {
-          loader.dismiss();
+          this.loading.dismiss();
         }
     })
     .catch(err => {
-        loader.dismiss();
+        this.loading.dismiss();
         console.log('debug error auth => ', err);
         alert("Unable to load your informations, please try again later..");
     });
@@ -75,33 +96,42 @@ export class ProfilPage {
   }
 
   loadSteamInfo() {
-    this.api.getDotaAccount(this.steamID32)
-    .subscribe(data => {
-      console.log("data steam info => ", data);
-      this.addProfileInfo(data);
-    }, error => {
-      alert("Unable to load your profile, please try again later");
-    })
+    return new Promise((resolve, reject) => {
+      return this.api.getDotaAccount(this.steamID32)
+      .subscribe(data => {
+        this.addProfileInfo(data);
+        return resolve();
+      }, error => {
+        alert("Unable to load your profile, please try again later");
+        return reject(error);
+      });  
+    });
   }
 
   loadWinLossInfo() {
-    this.api.getWinsLosses(this.steamID32)
-    .subscribe(data => {
-      console.log("data win loss info => ", data);
-      this.addWinLossInfo(data);
-    }, error => {
-      alert("Unable to load your profile, please try again later");
-    })
+    return new Promise((resolve, reject) => {
+      return this.api.getWinsLosses(this.steamID32)
+      .subscribe(data => {
+        this.addWinLossInfo(data);
+        return resolve();
+      }, error => {
+        alert("Unable to load your profile, please try again later");
+        return reject(error);
+      });
+    });
   }
 
   loadRecentMatches() {
-    this.api.getRecentMatches(this.steamID32)
-    .subscribe(data => {
-      console.log("data recent matches => ", data);
-      this.addRecentMatchesInfo(data);
-    }, error => {
-      alert("Unable to load your profile, please try again later");
-    })
+    return new Promise((resolve, reject) => {
+      return this.api.getRecentMatches(this.steamID32)
+      .subscribe(data => {
+        this.addRecentMatchesInfo(data);
+        return resolve();
+      }, error => {
+        alert("Unable to load your profile, please try again later");
+        return reject(error);
+      })  ;
+    });
   }
 
   addRecentMatchesInfo(listMatches: any) {

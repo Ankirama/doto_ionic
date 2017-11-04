@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { OpenDotaProvider } from '../../providers/opendota/opendota';
 import { AuthProvider } from '../../providers/auth/auth';
 
@@ -17,7 +17,6 @@ import { AuthProvider } from '../../providers/auth/auth';
 })
 export class MatchPage {
   
-  email: string;
   steamID32: string;
 
   recapMatch: any;
@@ -29,11 +28,10 @@ export class MatchPage {
   radiantScore: number = 0;
   direScore: number = 0;
 
+  private loading;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private auth: AuthProvider, private api: OpenDotaProvider) {
-    console.log("recapMatch => ", navParams);
+  constructor(public navCtrl: NavController, public navParams: NavParams, private auth: AuthProvider,public loadingCtrl: LoadingController, private api: OpenDotaProvider) {
     this.recapMatch = navParams.get('item');
-    console.log("recapMatch => ", this.recapMatch);
     this.reloadData(this.recapMatch.matchID);
   }
 
@@ -49,8 +47,6 @@ export class MatchPage {
             if (element.isRadiant) {
               this.radiantPlayers.push(element);
               this.direScore += element.deaths;
-              console.log("Debug radiant score :", this.radiantScore);
-              console.log("Debug radiant score :", element.kills);
               if (element.account_id == this.steamID32 && match.radiant_win) {
                 this.playerVictory = true;
               }
@@ -64,7 +60,6 @@ export class MatchPage {
           })
           .catch(error => {
             element.avatar = null;
-            console.log('error during hero find => ', error);
             element.isRadiant ? this.radiantPlayers.push(element) : this.direPlayers.push(element);  
           });     
         }
@@ -73,30 +68,49 @@ export class MatchPage {
   }
 
   getMatch(idMatch) {
-    this.api.getMatchById(idMatch).subscribe(data => {
-      this.getPlayersFromJson(data);
-    }, error => {
-      this.gotError = true;
-      console.log('debug error getMatches => ', error);
-      alert('Unable to plouf');
-      // make alert
-    })
-
-
+    return new Promise((resolve, reject) => {
+      return this.api.getMatchById(idMatch)
+      .subscribe(data => {
+        this.getPlayersFromJson(data);
+        return resolve();
+      }, error => {
+        alert("Unable to load your match, please try again later");
+        return reject(error);
+      });
+    });
   }
 
   reloadData(idMatch) {
     this.gotError = false;
+    this.loading = this.loadingCtrl.create({
+      content: 'Please wait...',
+      duration: 5000
+    });
+    this.loading.present();
     this.auth.getCurrentUser()
     .then(data => {
         if (data !== null) {
-            this.email = data.email;
             this.steamID32 = data.steamID32 != undefined ? data.steamID32 : null;
-            this.getMatch(idMatch);
+            if (this.steamID32 == null) {
+              alert("Unable to find your dota account, you must add it first");
+              this.loading.dismiss();
+            } else {
+              this.getMatch(this.recapMatch.matchID)
+              .then(() => {
+
+              })
+              .catch(error => {
+                this.loading.dismiss();
+              })
+            }
+        } else {
+          this.loading.dismiss();
         }
     })
     .catch(err => {
+      this.loading.dismiss();
         console.log('debug error matches => ', err);
+        alert("Unable to load your match, please try again later..");
     });
   }
 

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, LoadingController, InfiniteScroll } from 'ionic-angular';
 import { AuthProvider } from '../../providers/auth/auth';
 import { OpenDotaProvider, HeroData, MatchData } from '../../providers/opendota/opendota';
+import { ProfilPage } from '../profil/profil';
 import { MatchPage } from '../../pages/match/match';
 
 import 'rxjs/add/observable/throw';
@@ -112,6 +113,10 @@ export class MatchesPage {
     this.navCtrl.push(MatchPage, {
       item: item
     })
+  }
+
+  dotaAccount() {
+    this.navCtrl.setRoot(ProfilPage);
   }
 
   ionViewDidLoad() {

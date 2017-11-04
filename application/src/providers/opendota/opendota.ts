@@ -49,7 +49,7 @@ export class OpenDotaProvider {
 
     getHeroData(hero_id): Promise<HeroData> {
         return new Promise((resolve, reject) => {
-            return this.http.get('https://raw.githubusercontent.com/kronusme/dota2-api/master/data/heroes.json')
+            return this.http.get('https://raw.githubusercontent.com/viterb-c/dota2-api/master/data/heroes.json')
             .subscribe(data => {
                 let hero = data.json()["heroes"].find(myObj => myObj.id == hero_id);
                 if (hero === undefined) {

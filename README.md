@@ -9,9 +9,6 @@
 <h4 align="center">Application <strong>Ionic 3</strong> pour voir l'historique de ces parties sur le jeu vidéo <a href="http://www.dota2.com/play/">Dota 2</a>.</h4>
 
 <p align="center">
-  <a href="#">
-    <img src="https://img.shields.io/badge/groupe-14-ff69b4.svg" alt="Groupe 14" height="18">
-  </a>
   <a href="https://badge.fury.io/js/ionic">
     <img src="https://badge.fury.io/js/ionic.svg" alt="npm version" height="18">
   </a>
@@ -21,6 +18,9 @@
   <a href="#">
     <img src="https://img.shields.io/badge/release-1.0-brightgreen.svg" alt="Release version" height="18">
   </a>
+  <a href="#">
+    <img src="https://img.shields.io/badge/groupe-14-ff69b4.svg" alt="Groupe 14" height="18">
+  </a>
 </p>
 
 ---
@@ -44,15 +44,33 @@ Le projet a pour but de permettre aux joueurs de [Dota 2](http://www.dota2.com/p
 
 ### Front-end
 
+- Menu onglets (pas d'hamburger menu)
+- Loading Controller pour gérer les mauvaises connexions
+- Providers pour Firebase et OpenDota
+- Modal controller
+- Push notification
+- Pages
+  - Détails d'un item
+  - Liste de plusieurs items
+  - Connexion / inscription
 
 ### Back-end
 
-- Firebase Authentification
-- Firebase Database
-- Firebase Push
-- API [OpenDota](https://docs.opendota.com/)
+- Firebase [doto-ionic.firebaseio.com](https://doto-ionic.firebaseio.com/)
+  - Authentification
+  - Database
+  - Push
+- API externe [OpenDota](https://docs.opendota.com/)
 
 ## Détails
+
+### Connexion / Inscritpion
+
+### Matches (liste)
+
+### Match (détails)
+
+### Profil
 
 ## Equipe
 

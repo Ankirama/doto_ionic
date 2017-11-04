@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, LoadingController } from 'ionic-angular';
 import { Validators, FormBuilder, FormGroup} from '@angular/forms';
 import { AuthProvider } from '../../providers/auth/auth';
-import { TabsPage } from '../tabs/tabs';
 
 //import { Home } from '../tabs/tabs';
 /**
@@ -20,8 +19,9 @@ import { TabsPage } from '../tabs/tabs';
 export class LoginPage {
 
   authForm: FormGroup;
+  loading;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public formBuilder: FormBuilder, public auth: AuthProvider) {
+  constructor(public navCtrl: NavController, public formBuilder: FormBuilder, public auth: AuthProvider, private loadingCtrl: LoadingController) {
     this.navCtrl = navCtrl;
     this.authForm = formBuilder.group({
       email: ['', Validators.compose([Validators.required, Validators.pattern('^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,24})$')])],
@@ -35,11 +35,17 @@ export class LoginPage {
         email: value.email.toLowerCase(),
         password: value.password
       };
+      this.loading = this.loadingCtrl.create({
+        content: 'Please wait...'
+      });
+      this.loading.present();
       this.auth.loginWithEmail(credentials)
         .then(data => {
+          this.loading.dismiss();
           location.reload();
         })
         .catch(error => {
+          this.loading.dismiss();
           if (error.code === "auth/invalid-email" || error.code === "auth/wrong-password") {
             alert("Your combination email / password is not good.");
           } else {

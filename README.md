@@ -75,7 +75,7 @@ Ionic 3
 - Firebase [doto-ionic.firebaseio.com](https://doto-ionic.firebaseio.com/)
   - Authentification
   - Database
-  - Push
+  - Push (Notifications avec Firebase)
 - API externe [OpenDota](https://docs.opendota.com/)
 - API externe [Steam](https://developer.valvesoftware.com/wiki/Steam_Web_API)
 

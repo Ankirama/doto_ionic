@@ -30,7 +30,7 @@ Le projet a pour but de permettre aux joueurs de [Dota 2](http://www.dota2.com/p
 
 ---
 
-Pour télécharger l'apk version 1.0 [cliquez ici](https://github.com/Ankirama/doto_ionic/releases/download/v1.0/doto-ionic.apk)
+Pour télécharger l'apk version 1.0.1 [cliquez ici](https://github.com/Ankirama/doto_ionic/releases/download/v1.0.1/doto-ionic_1_0_1.apk)
 
 ---
 

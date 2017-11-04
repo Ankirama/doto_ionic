@@ -1,0 +1,57 @@
+page-profil {
+    ion-row {
+        margin: 5%;
+    }
+    ion-content {
+        .player-name {
+            font-size: 28px;
+            text-align: left;
+            color: rgba(245,245,245,0.870588)
+        }
+
+        .link-style {
+            text-align: center;
+        }
+    
+        .circle-pic {
+            width: 75px;
+            height: 75px;
+            -webkit-border-radius: 50%;
+            border-radius: 50%;
+        }
+
+        .info-profil {
+            color: rgb(179, 179, 179);
+            font-size: 12px;
+            text-align: left;
+            text-transform: uppercase;   
+        }
+
+        .title {
+            color: rgb(245, 245, 245);
+            font-size: 20px;
+        }
+
+        .wins-style {
+            color: rgb(102, 187, 106);
+            font-size: 22px;
+        }
+
+        .losses-style {
+            color: rgb(255, 76, 76);
+            font-size: 22px;
+        }
+
+        .rslt-style {
+            color: rgba(255, 255, 255, 0.87);
+            font-size: 22px;            
+        }
+
+    }
+}
+
+.bg-style {
+    background-color: rgb(38, 40, 56);
+}
+
+

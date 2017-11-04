@@ -1,0 +1,26 @@
+<!--
+  Generated template for the SteamLoginPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+    <ion-navbar>
+        <ion-title>Find your username</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content class="bg-style" padding>
+    <form [formGroup]="steamForm" (ngSubmit)="onSubmit(steamForm.value)">
+        <ion-item class="item-style">
+            <ion-label floating>Username</ion-label>
+            <ion-input formControlName="username" type="text"></ion-input>
+        </ion-item>
+
+        <button ion-button full color="primary" [disabled]="!steamForm.valid" style="margin-top: 20px;" type="submit">Find a steam account</button>
+    </form>
+    <button (click)="logout()" ion-button color="danger" block>Log out</button>
+</ion-content>

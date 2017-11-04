@@ -1,0 +1,35 @@
+page-matches {
+    ion-content {
+        .list-style {
+            color: rgb(245, 245, 245);
+            font-size: 12px;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        .card-title {
+            color: rgb(245, 245, 245)
+        }
+
+        .kills-style {
+            color: rgb(102, 187, 106);
+        }
+
+        .deaths-style {
+            color: rgb(255, 76, 76);
+        }
+
+        .gpm-style {
+            color: rgb(229, 193, 0);
+        }
+
+        .background-transparent {
+            background-color: transparent;
+        }
+    }
+}
+
+
+.bg-style {
+    background-color: rgb(38, 40, 56);
+}

@@ -1,0 +1,42 @@
+<!--
+  Generated template for the LoginPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Sign in</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content class="bg-style" padding>
+  <form [formGroup]="authForm" (ngSubmit)="onSubmit(authForm.value)">
+      <ion-item class="item-style">
+          <ion-label floating>Email</ion-label>
+          <ion-input formControlName="email" type="email"></ion-input>
+      </ion-item>
+
+      <ion-item class="item-style" *ngIf="authForm.controls.email.hasError('required') && authForm.controls.email.touched">
+          <p>Email field required!</p>
+      </ion-item>
+      <ion-item class="item-style" *ngIf="authForm.controls.email.hasError('pattern') && authForm.controls.email.touched">
+          <p>You must use a valid email!</p>
+      </ion-item>
+
+      <ion-item class="item-style">
+          <ion-label floating>Password</ion-label>
+          <ion-input formControlName="password" type="password"></ion-input>
+      </ion-item>
+      <ion-item class="item-style" *ngIf="authForm.controls.password.hasError('required') && authForm.controls.password.touched">
+          <p>Password field required!</p>
+      </ion-item>
+      <ion-item class="item-style" *ngIf="authForm.controls.password.hasError('minlength') && authForm.controls.password.touched">
+          <p>Sorry, minimum password length is 8!</p>
+      </ion-item>
+
+      <button ion-button full color="primary" [disabled]="!authForm.valid" style="margin-top: 20px;" type="submit">Sign In</button>
+  </form>
+</ion-content>

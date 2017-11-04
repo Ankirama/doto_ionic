@@ -1,0 +1,34 @@
+<!--
+  Generated template for the ModalSteamPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+    <ion-toolbar>
+        <ion-title>
+            Steam User
+        </ion-title>
+        <ion-buttons start>
+            <button ion-button (click)="dismiss()">
+       Close
+      </button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+
+<ion-content class="bg-style" padding>
+    <ion-grid>
+        <ion-row text-center>
+            <ion-col width-50 offset-25><img src="{{steamUser.avatar}}"></ion-col>
+            <ion-col>
+                <h2>{{steamUser.username}}</h2>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <button (click)="dismiss()" ion-button color="danger" block>Try again</button>
+            <button (click)="validate()" ion-button block>Add your Account</button>
+        </ion-row>
+    </ion-grid>
+</ion-content>

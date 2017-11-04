@@ -32,7 +32,6 @@ export class ModalSteamPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ModalSteamPage');
   }
 
 }

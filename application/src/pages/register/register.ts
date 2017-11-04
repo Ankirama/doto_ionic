@@ -50,12 +50,10 @@ export class RegisterPage {
     }
 
   ionViewDidEnter() {
-    console.log('reset form');
     this.authForm.reset();
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad RegisterPage');
   }
 
 }

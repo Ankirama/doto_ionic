@@ -41,12 +41,8 @@ export class SteamLoginPage {
 
       this.http.get("/resolveVanity/?key=" + this.apiKey + "&vanityurl=" + value.username)
         .subscribe(data => {
-          console.log('data => ', data.json());
-          console.log('debug ==> ', data.json()["response"]);
           let steamid = data.json()["response"]["steamid"];
-          console.log('debug steamid => ', steamid);
           if (steamid === undefined) {
-            alert('Unable to find your username, please try again');            
           } else {
             let steamid32 = new BigNumber(steamid).minus("76561197960265728").toString();
             this.getUserSummary(steamid).subscribe(data => {
@@ -93,11 +89,9 @@ export class SteamLoginPage {
   }
 
   ionViewDidEnter() {
-    console.log('reset form');
     this.steamForm.reset();
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad SteamLoginPage');
   }
 }

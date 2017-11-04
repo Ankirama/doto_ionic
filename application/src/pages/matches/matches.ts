@@ -31,13 +31,11 @@ export class MatchesPage {
 
   getMatches(steamID32, offset = 0, limit = 10) {
     this.api.getMatches(steamID32, offset, limit).subscribe(data => {
-        console.log('debug data ==> ', data);
         this.matches = this.matches.concat(data);
     }, error => {
       this.gotError = true;
       console.log('debug error getMatches => ', error);
-      alert('Unable to plouf');
-//      alert(error);
+      alert(error);
     });
   }
 

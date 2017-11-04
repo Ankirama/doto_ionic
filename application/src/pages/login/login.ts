@@ -50,12 +50,10 @@ export class LoginPage {
   }
 
   ionViewDidEnter() {
-    console.log('reset form');
     this.authForm.reset();
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad LoginPage');
   }
 
 }

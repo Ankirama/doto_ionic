@@ -20,7 +20,6 @@ export class UserData {
 export class AuthProvider {
 
     constructor(private af: AngularFireAuth, private ad: AngularFireDatabase) {
-        console.log('Hello AuthProvider Provider');
     }
 
     loginWithEmail(credentials: any) {
@@ -78,7 +77,6 @@ export class AuthProvider {
                                 email: snapshot.val().email,
                                 steamID32: snapshot.val().steamID32
                             };
-                            console.log('debug email => ', userData.email);
                             return resolve(userData);
                         })
                         .catch(err => {

@@ -13,7 +13,7 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content class="bg-style" padding>
     <ion-refresher (ionRefresh)="doRefresh($event)">
         <ion-refresher-content></ion-refresher-content>
     </ion-refresher>
@@ -21,7 +21,7 @@
         <ion-row *ngIf="matches.length == 0">
             <p text-center>No matches found.</p>
         </ion-row>
-        <ion-list *ngIf="steamID32 != null">
+        <ion-list class="bg-style" *ngIf="steamID32 != null">
             <button ion-item *ngFor="let match of matches" (click)="itemTapped($event, match)">
                 <ion-card *ngIf="match.error == null">
                     <img src="{{match.hero.avatar}}">

@@ -36,9 +36,18 @@ Le projet a pour but de permettre aux joueurs de [Dota 2](http://www.dota2.com/p
 
 ## Sommaire
 
+- [Equipe](#equipe)
 - [Fonctionnalités](#fonctionnalités)
 - [Détails](#details)
-- [Equipe](#equipe)
+
+## Equipe
+
+L'équipe est composée de 2 membres :
+
+- Fabien Martinez ([profil Epitech](https://intra.epitech.eu/user/fabien.martinez@epitech.eu/))
+  - N'a pas participé au séminaire
+- Charles Viterbo ([profil Epitech](https://intra.epitech.eu/user/charles.viterbo@epitech.eu/))
+  - A participé au séminaire
 
 ## Fonctionnalités
 
@@ -80,7 +89,7 @@ Ionic 3
 - Alerte personnalisée si la combinaison Email / mot de passe n'est pas correcte
 - Réinitialisation des champs des formulaires quand on change de page
 
-### Matches (liste)
+### Matchs (liste)
 
 - Pull refresh pour pouvoir rafraichir les données (grâce à `ion-refresher`)
 - Provider `auth.ts` pour récupérer les informations de l'utilisateur (princiaplement le steamID32 nécessaire pour récupérer les informations du joueur)
@@ -88,21 +97,13 @@ Ionic 3
   - Si l'utilisateur n'a pas de matchs, un message s'affiche
   - Si un problème quelconque survient dans ce cas on affiche une alerte et un bouton pour rafraichir la page
   - Si un match en particulier ne se charge pas un message s'affiche à la place des informations du match
-- Provider `opendota.ts` pour récuperer les informations sur les matches avec de la pagination (récupération de 10 matches par 10 matches)
-- Infinite Scroll pour afficher plus de matches en augmentant l'offset utilisé par `opendota.ts` pour récupérer les matches
+- Provider `opendota.ts` pour récuperer les informations sur les matchs avec de la pagination (récupération de 10 matches par 10 matches)
+- Infinite Scroll pour afficher plus de matchs en augmentant l'offset utilisé par `opendota.ts` pour récupérer les matchs
 - Utilisation de `ion-list` et `ion-card` pour afficher chaque match
 - En appuyant sur un match on est redirigé vers les détails de ce match
-- Loading Controller lors des ajouts des matches
+- Loading Controller lors des ajouts des matchs
 
 ### Match (détails)
 
 ### Profil
 
-## Equipe
-
-L'équipe est composée de 2 membres :
-
-- Fabien Martinez ([profil Epitech](https://intra.epitech.eu/user/fabien.martinez@epitech.eu/))
-  - N'a pas participé au séminaire
-- Charles Viterbo ([profil Epitech](https://intra.epitech.eu/user/charles.viterbo@epitech.eu/))
-  - A participé au séminaire

@@ -13,6 +13,53 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content class="bg-style" padding>
 
+<div class="title">Radiant - Overview</div>
+  <ion-list *ngIf="radiantPlayers">
+    <ion-item class="list-title">
+        <ion-row>
+          <ion-col col-2>Hero</ion-col>
+          <ion-col col-1>Lvl</ion-col>
+          <ion-col col-3>Player</ion-col>
+          <ion-col col-2>K/D/A</ion-col>
+          <ion-col class="list-title-gold" col-2>GPM</ion-col>
+          <ion-col col-2>XPM</ion-col>
+        </ion-row>
+      </ion-item>
+    <ion-item class="list-player" *ngFor="let player of radiantPlayers">
+      <ion-row>
+          <ion-col col-2>Hero</ion-col>
+          <ion-col col-1>{{player.level}}</ion-col>
+          <ion-col col-3>{{player.personaname ? player.personaname : 'Anonymous'}}</ion-col>
+          <ion-col col-2>{{player.kills}}/{{player.deaths}}/{{player.assists}}</ion-col>
+          <ion-col class="list-player-gold" col-2>{{player.gold_per_min}}</ion-col>
+          <ion-col col-2>{{player.xp_per_min}}</ion-col>
+      </ion-row>
+    </ion-item>
+  </ion-list>
+
+  <div class="title">Dire - Overview</div>
+  <ion-list *ngIf="direPlayers">
+    <ion-item class="list-title">
+        <ion-row>
+            <ion-col col-2>Hero</ion-col>
+            <ion-col col-1>Lvl</ion-col>
+            <ion-col col-3>Player</ion-col>
+          <ion-col col-2>K/D/A</ion-col>
+          <ion-col class="list-title-gold" col-2>GPM</ion-col>
+          <ion-col col-2>XPM</ion-col>
+        </ion-row>
+      </ion-item>
+    <ion-item class="list-player" *ngFor="let player of direPlayers">
+      <ion-row>
+          <ion-col col-2>Hero</ion-col>
+          <ion-col col-1>{{player.level}}</ion-col>
+          <ion-col col-3>{{player.personaname ? player.personaname : 'Anonymous'}}</ion-col>
+          <ion-col col-2>{{player.kills}}/{{player.deaths}}/{{player.assists}}</ion-col>
+          <ion-col class="list-player-gold" col-2>{{player.gold_per_min}}</ion-col>
+          <ion-col col-2>{{player.xp_per_min}}</ion-col>
+      </ion-row>
+    </ion-item>
+  </ion-list>
 </ion-content>

@@ -1,3 +1,46 @@
 page-match {
+    ion-content {
+
+        .list-title {
+            color: rgb(245, 245, 245);
+            font-size: 12px;
+            background-color: transparent;
+            text-align: center;
+            text-transform: uppercase;
+        }
+
+        .list-title-gold {
+            color: rgb(229, 193, 0);
+            font-size: 12px;
+            background-color: transparent;
+            text-align: center; 
+            text-transform: uppercase;
+        }
+
+        .list-player {
+            color: rgb(245, 245, 245);
+            font-size: 12px;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        .list-player-gold {
+            color: rgb(229, 193, 0);
+            font-size: 12px;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        .title {
+            color: rgb(245, 245, 245);
+            font-size: 20px;
+            text-align: start;
+        }
+    }
 
 }
+
+.bg-style {
+    background-color: rgb(38, 40, 56);
+}
+

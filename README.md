@@ -39,6 +39,7 @@ Le projet a pour but de permettre aux joueurs de [Dota 2](http://www.dota2.com/p
 - [Equipe](#equipe)
 - [Fonctionnalités](#fonctionnalités)
 - [Détails](#details)
+- [Exemple](#exemple)
 
 ## Equipe
 
@@ -67,6 +68,7 @@ Ionic 3
   - Détails d'un item
   - Liste de plusieurs items
   - Connexion / inscription
+- Utilisation de `Promise` et d'`Observable` pour récupérer des informations
 
 ### Back-end
 
@@ -75,6 +77,7 @@ Ionic 3
   - Database
   - Push
 - API externe [OpenDota](https://docs.opendota.com/)
+- API externe [Steam](https://developer.valvesoftware.com/wiki/Steam_Web_API)
 
 ## Détails
 
@@ -101,7 +104,7 @@ Ionic 3
 - Infinite Scroll pour afficher plus de matchs en augmentant l'offset utilisé par `opendota.ts` pour récupérer les matchs
 - Utilisation de `ion-list` et `ion-card` pour afficher chaque match
 - En appuyant sur un match on est redirigé vers les détails de ce match
-- Loading Controller lors des ajouts des matchs
+- Loading Controller lors des ajouts des matchs avec un timeout de 20 secondes si le chargement prend trop de temps
 
 ### Match (détails)
 
@@ -112,6 +115,24 @@ Ionic 3
   - Si le joueur n'a pas de compte public dota 2 (les informations concernant son compte ne peuvent être récupérés) son nom sera `Anonym`
 - Loading Controller pour afficher la page seulement quand toutes les informations sont chargées.
 
-
 ### Profil
 
+- Pull refresh (grâce à `ion-refresher`) pour mettre à jour les informations du profil
+- Loading Controller pour afficher la page seulement quand toutes les informations sont chargées.
+- Utilisation du provider `auth.ts` pour récupérer l'utilisateur actuellement connecté avec son steamID32
+  - S'il n'y a pas de steamID dans ce cas un message apparait demandant d'en rajouter un
+- Utilisateur du provider `opendota.ts` pour récupérer les informations de joueur en passant par l'API d'`OpenDota`
+- Plusieurs calculs effectués pour afficher des informations non fournies par l'API
+
+### Connexion steam / déconnexion
+
+- Modal Controller pour trouver le compte que l'on recherche et valider à l'aide de 2 `buttons`
+- Loading Controller lors de la recherche sur `Steam`
+- Utilisation de `BigNumber` pour convertir un nombre sur 64 bits
+- Si l'utilisateur n'est pas trouvé une alerte apparait
+- Bouton pour se déconnecter et revenir aux pages de connexion / inscription
+- Vérification de la plateforme pour gérer les problèmes de CORS
+
+## Exemple
+
+Pour pouvoir voir des parties de Dota 2 il faut connaitre quelqu'un qui joue, pour cela vous pouvez tester avec le compte `Ankirama` par exemple

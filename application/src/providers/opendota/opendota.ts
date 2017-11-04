@@ -47,6 +47,42 @@ export class OpenDotaProvider {
             });
     }
 
+    getDotaAccount(steamID32: string) {
+        return this.http.get(this.apiURL + '/players/' + steamID32)
+            .map((res: Response) => {
+                console.log('debug ==> ', res.json());
+                return res.json();
+            })
+            .catch(error => {
+                console.log("debug error getDotaAccount => ", error);
+                return Observable.throw(new Error("Unable to get your dota profile... Try again later."));
+            })
+    }
+
+    getWinsLosses(steamID32: string) {
+        return this.http.get(this.apiURL + '/players/' + steamID32 + "/wl")
+            .map((res: Response) => {
+                console.log('debug ==> ', res.json());
+                return res.json();
+            })
+            .catch(error => {
+                console.log("debug error getWinsLosses => ", error);
+                return Observable.throw(new Error("Unable to get your wins and losses... Try again later."));
+            })
+    }
+
+    getRecentMatches(steamID32: string) {
+        return this.http.get(this.apiURL + '/players/' + steamID32 + "/recentMatches")
+            .map((res: Response) => {
+                console.log('debug ==> ', res.json());
+                return res.json();
+            })
+            .catch(error => {
+                console.log("debug error getWinsLosses => ", error);
+                return Observable.throw(new Error("Unable to get your recent matches... Try again later."));
+            })
+    }
+
     getHeroData(hero_id): Promise<HeroData> {
         return new Promise((resolve, reject) => {
             return this.http.get('https://raw.githubusercontent.com/viterb-c/dota2-api/master/data/heroes.json')

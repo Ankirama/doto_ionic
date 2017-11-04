@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, ModalController, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, ModalController, LoadingController, Platform } from 'ionic-angular';
 import { FormBuilder, FormGroup} from '@angular/forms';
 import { Http } from '@angular/http';
 import { BigNumber } from 'bignumber.js'
@@ -31,7 +31,7 @@ export class SteamLoginPage {
   steamForm: FormGroup;
   loading;
 
-  constructor(public navCtrl: NavController, public formBuilder: FormBuilder, private http: Http, private modalCtrl : ModalController, private auth: AuthProvider, private loadingCtrl: LoadingController) {
+  constructor(public navCtrl: NavController, public formBuilder: FormBuilder, private http: Http, private modalCtrl : ModalController, private auth: AuthProvider, private loadingCtrl: LoadingController, private platform: Platform) {
     this.steamForm = formBuilder.group({
       username: [''],
     });
@@ -43,7 +43,12 @@ export class SteamLoginPage {
         content: 'Please wait...'
       });
       this.loading.present();
-      this.http.get("/resolveVanity/?key=" + this.apiKey + "&vanityurl=" + value.username)
+      let url = '/resolveVanity';
+      if (this.platform.is('android'))
+       {
+         url = "http://api.steampowered.com/ISteamUser/ResolveVanityURL/v0001";
+       }
+      this.http.get(url + "/?key=" + this.apiKey + "&vanityurl=" + value.username)
         .subscribe(data => {
           let steamid = data.json()["response"]["steamid"];
           if (steamid === undefined) {
@@ -102,7 +107,12 @@ export class SteamLoginPage {
   }
 
   getUserSummary(steamid) {
-    let url = "/user/?key=" + this.apiKey + "&steamids=" + steamid;
+    let url = '/user';
+    if (this.platform.is('android'))
+    {
+       url = "http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002";
+    }
+    url = url + "/?key=" + this.apiKey + "&steamids=" + steamid;
     return this.http.get(url);
   }
 

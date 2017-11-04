@@ -21,8 +21,8 @@
         <ion-row *ngIf="matches.length == 0">
             <p text-center>No matches found.</p>
         </ion-row>
-        <ion-list class="bg-style" *ngIf="steamID32 != null">
-            <button ion-item *ngFor="let match of matches" (click)="itemTapped($event, match)">
+        <ion-list  *ngIf="steamID32 != null">
+            <button ion-item class="list-style" *ngFor="let match of matches" (click)="itemTapped($event, match)">
                 <ion-card *ngIf="match.error == null">
                     <img src="{{match.hero.avatar}}">
                     <ion-card-content text-center>
@@ -47,11 +47,7 @@
                 </ion-card>
             </button>
         </ion-list>
-        <!--
-        <ion-row *ngIf="steamID32 != null">
-            <button (click)="loadMoreData()" ion-button block>Load more matches</button>
-        </ion-row>
-        -->
+        
         <ion-infinite-scroll *ngIf="steamID32 != null" (ionInfinite)="loadMoreData($event)">
             <ion-infinite-scroll-content
             loadingSpinner="bubbles"

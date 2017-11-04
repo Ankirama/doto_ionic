@@ -37,20 +37,37 @@ export class ProfileInformations {
 })
 export class ProfilPage {
   public profileInfo: ProfileInformations;
+  private steamID32: string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController, 
     public api: OpenDotaProvider, public auth: AuthProvider) {
     let loader = this.loadingCtrl.create({
       content: "Loading your profile ..."
     });
-    loader.present();
-    
     this.profileInfo = new ProfileInformations();
-    this.loadSteamInfo();
-    this.loadWinLossInfo();
-    this.loadRecentMatches();
-
-    loader.dismiss();
+    loader.present();
+    this.auth.getCurrentUser()
+    .then(data => {
+        if (data !== null) {
+            this.steamID32 = data.steamID32 != undefined ? data.steamID32 : null;
+            if (this.steamID32 == null) {
+              alert("Unable to find your dota account, you must add it first.");
+              loader.dismiss();
+            } else {
+              this.loadSteamInfo();
+              this.loadWinLossInfo();
+              this.loadRecentMatches();
+              loader.dismiss();
+            }
+        } else {
+          loader.dismiss();
+        }
+    })
+    .catch(err => {
+        loader.dismiss();
+        console.log('debug error auth => ', err);
+        alert("Unable to load your informations, please try again later..");
+    });
   }
 
   ionViewDidLoad() {

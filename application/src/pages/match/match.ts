@@ -25,6 +25,10 @@ export class MatchPage {
   radiantPlayers: any;
   direPlayers: any;
   hero: any;
+  playerVictory: any;
+  radiantScore: number = 0;
+  direScore: number = 0;
+
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private auth: AuthProvider, private api: OpenDotaProvider) {
     console.log("recapMatch => ", navParams);
@@ -39,22 +43,37 @@ export class MatchPage {
       this.direPlayers = [];
       match.players.forEach(element => {
         if ('isRadiant' in element) {
-          element.isRadiant ? this.radiantPlayers.push(element) : this.direPlayers.push(element);
-          /*this.hero = this.api.getHeroData(element.hero_id);
-          if (this.hero != null) {
-            element.avatar = this.hero.avatar;
-            console.log(element.avatar);
-          }*/
+          this.api.getHeroData(element.hero_id)
+          .then(hero => {
+            element.avatar = hero.avatar;
+            if (element.isRadiant) {
+              this.radiantPlayers.push(element);
+              this.direScore += element.deaths;
+              console.log("Debug radiant score :", this.radiantScore);
+              console.log("Debug radiant score :", element.kills);
+              if (element.account_id == this.steamID32 && match.radiant_win) {
+                this.playerVictory = true;
+              }
+            } else {
+              this.direPlayers.push(element)
+              this.radiantScore += element.deaths;
+              if (element.account_id == this.steamID32 && !match.radiant_win) {
+                this.playerVictory = true;
+              }
+            } 
+          })
+          .catch(error => {
+            element.avatar = null;
+            console.log('error during hero find => ', error);
+            element.isRadiant ? this.radiantPlayers.push(element) : this.direPlayers.push(element);  
+          });     
         }
       });
     }
-    console.log("radiant Players => ", this.radiantPlayers);
-    console.log("dire Players => ", this.direPlayers);
   }
 
   getMatch(idMatch) {
     this.api.getMatchById(idMatch).subscribe(data => {
-      console.log('debug data => ', data);
       this.getPlayersFromJson(data);
     }, error => {
       this.gotError = true;
